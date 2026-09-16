@@ -1,4 +1,4 @@
-// places-data.js - Catálogo de Recomendaciones Curadas - Puerto Varas por Mamá Santi (@datitosdelajose)
+// places-data.js - Catálogo de Recomendaciones Curadas - Puerto Varas por Datitos de la Jose (@datitosdelajose)
 // Coordenadas georreferenciadas exactas en torno a Puerto Varas, Ensenada, Frutillar y el Lago Llanquihue.
 // Incluye enlaces directos a Airbnb, WhatsApp verificado y recomendaciones en video.
 
@@ -41,7 +41,7 @@ const PLACES_DATA = [
     whatsapp: "+56983244111",
     instagram: "@cantosdelchucao",
     airbnbUrl: "https://www.airbnb.cl/s/Puerto-Varas--Chile/homes?query=Cantos%20del%20Chucao%20Tres%20Puentes",
-    curatorNote: "Elegida 10/10 por Mamá Santi",
+    curatorNote: "Elegida 10/10 por la Jose",
     featured: true,
     tags: ["cabanas", "airbnb", "bosque", "tinaja", "romantico", "chucao"]
   },
@@ -230,7 +230,7 @@ const PLACES_DATA = [
     whatsapp: "+56987654321",
     instagram: "@cafemawen.pv",
     airbnbUrl: null,
-    curatorNote: "Recomendado por Mamá Santi",
+    curatorNote: "Dato de la Jose",
     featured: true,
     tags: ["lluvia", "cafe", "pasteleria", "chimenea"]
   },

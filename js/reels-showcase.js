@@ -1,4 +1,4 @@
-// reels-showcase.js - Motor interactivo del Showcase de Reels para Mamá Santi (@datitosdelajose)
+// reels-showcase.js - Motor interactivo del Showcase de Reels para Datitos de la Jose (@datitosdelajose)
 // Inspirado en la arquitectura de showcase audiovisual de Santi (landing 2)
 
 let currentReelsFilter = 'all';

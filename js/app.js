@@ -1,4 +1,4 @@
-// app.js - Lógica interactiva principal para Mamá Santi · Puerto Varas
+// app.js - Lógica interactiva principal para Datitos de la Jose · Puerto Varas
 // Controla el carrusel Hero, el mapa Leaflet, filtros por clima/mood, buscador y renderizado de tarjetas.
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -286,7 +286,7 @@ function initPlacesApp() {
             <img class="card-img" src="${place.image}" alt="${place.name}" loading="lazy" />
             <div class="card-floating-badge">${place.categoryBadge}</div>
             <div class="card-rating-badge">★ ${place.rating}</div>
-            <div class="curator-tag-overlay">Recomendado por Mamá Santi</div>
+            <div class="curator-tag-overlay">Dato de la Jose</div>
           </div>
           <div class="card-body">
             <h3 class="card-title">${place.name}</h3>
