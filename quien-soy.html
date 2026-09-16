@@ -1,0 +1,464 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Quién Soy · María José (@datitosdelajose) | Puerto Varas</title>
+  <meta name="description" content="Conoce la historia de María José Ibáñez, creadora de @datitosdelajose en Puerto Varas, Región de Los Lagos. Datos turísticos 100% comprobados en terreno.">
+
+  <!-- Google Fonts: Plus Jakarta Sans & Outfit -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <!-- Estilos Custom -->
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <!-- ========================================================================
+       HEADER FLOTANTE ESTILO PINTEREST
+       ======================================================================== -->
+  <header class="site-header">
+    <div class="header-container">
+      <a href="index.html" class="brand-wrapper">
+        <div class="brand-icon">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/>
+          </svg>
+        </div>
+        <div class="brand-text">
+          <span class="brand-title">María José</span>
+          <span class="brand-subtitle">@datitosdelajose · Puerto Varas</span>
+        </div>
+      </a>
+
+      <!-- Buscador Rápido -->
+      <div class="search-bar-wrapper">
+        <svg class="search-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <circle cx="11" cy="11" r="8"></circle>
+          <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+        </svg>
+        <input 
+          type="text" 
+          id="search-input"
+          class="search-input-box" 
+          placeholder="Buscar cabañas con tinaja, küchens, paseos..."
+          autocomplete="off"
+        >
+      </div>
+
+      <!-- Navegación Chic -->
+      <nav class="nav-links-wrapper">
+        <a href="index.html" class="nav-link-pill">
+          <span>Explorar</span>
+        </a>
+        <a href="index.html#mapa-section" class="nav-link-pill">
+          <span>Mapa</span>
+        </a>
+        <a href="quien-soy.html" class="nav-link-pill active">
+          <span>Quién Soy</span>
+        </a>
+        <a href="empresa.html" class="nav-link-pill">
+          <span>Empresa</span>
+        </a>
+      </nav>
+
+      <!-- Widget de Clima en Vivo y Hora Local (Puerto Varas) -->
+      <div class="header-weather-widget-slot"></div>
+
+      <!-- Botón Flotante "Mi Ruta" -->
+      <button class="btn-route-toggle" id="btn-header-route" title="Ver mi itinerario del día">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+          <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/>
+        </svg>
+        <span>Mi Ruta</span>
+        <span class="route-count-badge" style="display: none;">0</span>
+      </button>
+    </div>
+  </header>
+
+  <!-- Banner Inteligente Recomendado según el Clima Actual en Puerto Varas -->
+  <div id="smart-weather-banner" class="smart-weather-banner-wrap" style="display: none;"></div>
+
+  <!-- ========================================================================
+       CONTENIDO EDITORIAL "QUIÉN SOY"
+       ======================================================================== -->
+  <main class="editorial-container">
+    <div class="editorial-hero-grid">
+      <!-- Retrato Editorial Real de María José (Sobre Mí) -->
+      <div class="editorial-portrait-frame">
+        <img 
+          src="thumbs/maria_jose_sobre_mi.png" 
+          alt="María José Ibáñez (@datitosdelajose) en Puerto Varas" 
+          class="editorial-portrait-img"
+        >
+        <div class="editorial-portrait-badge">
+          <div class="portrait-name">María José Ibáñez</div>
+          <div class="portrait-subtitle">@datitosdelajose · Creadora de Contenido & UGC</div>
+        </div>
+      </div>
+
+      <!-- Relato Personal e Historia Real -->
+      <article class="editorial-story">
+        <div class="editorial-tag">Sobre Mí & Filosofía de Vida</div>
+        <h1 class="editorial-headline">Mostrar los mejores datos del sur al mundo mundial.</h1>
+        
+        <p class="editorial-paragraph">
+          Soy <strong>María José Ibáñez</strong> ("la Jose"). Psicopedagoga de profesión, especialista en trastornos del lenguaje y comunicación oral. Santiaguina de nacimiento, pero viviendo más de la mitad de mi vida en el sur, donde formé mi hogar y mi familia: estoy casada y tengo dos hijos universitarios.
+        </p>
+
+        <p class="editorial-paragraph">
+          A través de <strong>@datitosdelajose</strong>, me apasiona conectar con marcas, cabañas, hoteles y emprendimientos locales que entreguen un buen dato y mostrárselo a mi comunidad con honestidad, calidez y estética real.
+        </p>
+
+        <!-- Destacado Publicación Oficial con su segunda foto -->
+        <div class="editorial-insta-highlight">
+          <img src="thumbs/maria_jose_post.jpg" alt="María José Ibáñez en terreno" class="editorial-insta-img">
+          <div class="editorial-insta-caption">
+            <strong>María José en terreno</strong>
+            <span>"Te cuento un poquito de mi vida y de mi trabajo conectando marcas y viajeros en el sur."</span>
+            <a href="https://www.instagram.com/p/DabbHtFj7tS/" target="_blank" rel="noopener" class="editorial-insta-link">Ver publicación en Instagram →</a>
+          </div>
+        </div>
+
+        <!-- Manifiesto de Selección -->
+        <div class="editorial-rules-box">
+          <h3 class="rules-title">Mi Compromiso: 100% Comprobadas por Mí</h3>
+          <ul class="rules-list">
+            <li>
+              <span class="rules-bullet">1.</span>
+              <span><strong>Visita presencial real:</strong> No recomiendo por catálogo ni acepto acuerdos a ciegas. Voy al lugar, pruebo la tinaja caliente a leña, degusto los desayunos y duermo en la cabaña antes de compartirla.</span>
+            </li>
+            <li>
+              <span class="rules-bullet">2.</span>
+              <span><strong>El factor humano:</strong> Valoro la calidez de quien atiende, el respeto por la naturaleza sureña y los rincones con alma frente al lago Llanquihue y los volcanes.</span>
+            </li>
+            <li>
+              <span class="rules-bullet">3.</span>
+              <span><strong>Datos útiles y directos:</strong> Siempre comparto el contacto directo del dueño por WhatsApp o el anuncio en Airbnb para que tu reserva sea rápida y segura.</span>
+            </li>
+          </ul>
+        </div>
+
+        <!-- Botón Instagram Oficial -->
+        <div style="margin-top: 1rem; display: flex; gap: 1rem; flex-wrap: wrap; align-items: center;">
+          <a href="https://www.instagram.com/datitosdelajose/#" target="_blank" rel="noopener" class="btn-hero-primary" style="background: linear-gradient(135deg, #833ab4, #fd1d1d, #fcb045); color: #fff;">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
+            </svg>
+            <span>Seguir a María José en Instagram</span>
+          </a>
+          <a href="#reels-videos" class="btn-hero-secondary" style="color: var(--color-text-primary); border-color: var(--color-border);">
+            <span>Ver Reels & Videos Abajo</span>
+          </a>
+        </div>
+      </article>
+    </div>
+
+    <!-- ========================================================================
+         SHOWCASE DE REELS EN VIDEO (@datitosdelajose)
+         ======================================================================== -->
+    <section class="reels-showcase-section" id="reels-videos">
+      <div class="reels-showcase-container">
+        
+        <div class="reels-header-row">
+          <div class="reels-header-content">
+            <div class="reels-section-badge">Contenido en Terreno · @datitosdelajose</div>
+            <h2 class="reels-section-title">Los Datitos de la Jose en Reels</h2>
+            <p class="reels-section-desc">
+              Recomendaciones comprobadas personalmente en Puerto Varas, Ensenada, Frutillar y alrededores. Cabañas secretas con tinaja, opciones en Airbnb, piscinas climatizadas y los mejores buffets del sur en video vertical.
+            </p>
+          </div>
+
+          <!-- Tarjeta de Perfil Oficial de Instagram -->
+          <div class="reels-profile-card">
+            <div class="reels-profile-avatar">
+              <img 
+                src="thumbs/maria_jose_post.jpg" 
+                alt="María José Ibáñez (@datitosdelajose)" 
+                style="width: 100%; height: 100%; border-radius: 50%; object-fit: cover;"
+              >
+            </div>
+            <div class="reels-profile-meta">
+              <div class="reels-profile-handle-row">
+                <span class="reels-profile-handle">@datitosdelajose</span>
+                <span class="reels-verified-icon" title="Cuenta Verificada">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg>
+                </span>
+                <span style="font-size: 0.72rem; color: var(--color-text-muted); background: var(--color-canvas-alt); padding: 0.15rem 0.5rem; border-radius: var(--radius-pill); font-weight: 700;">Creador digital</span>
+              </div>
+              <div class="reels-profile-stats">
+                <strong>María José Ibáñez</strong> · 1.581 posts · <strong>35,7 mil</strong> seguidores · <span id="reelsFilterCount">22 videos</span>
+              </div>
+              <div style="font-size: 0.78rem; color: #b45309; font-weight: 700; margin-top: 2px;">
+                Recomendaciones comprobadas personalmente
+              </div>
+            </div>
+            <a href="https://www.instagram.com/datitosdelajose/#" target="_blank" rel="noopener" class="reels-btn-follow">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
+              </svg>
+              <span>Ver en Instagram</span>
+            </a>
+          </div>
+        </div>
+
+        <!-- Filtros de Categoría -->
+        <div class="reels-filter-bar">
+          <button class="reels-filter-btn active" data-filter="all">
+            <span>Todos los Videos (22)</span>
+          </button>
+          <button class="reels-filter-btn" data-filter="cabanas">
+            <span>Cabañas & Airbnb</span>
+          </button>
+          <button class="reels-filter-btn" data-filter="tinajas">
+            <span>Tinajas & Piscinas</span>
+          </button>
+          <button class="reels-filter-btn" data-filter="desayunos">
+            <span>Desayunos Buffet</span>
+          </button>
+          <button class="reels-filter-btn" data-filter="glamping">
+            <span>Glamping & Bosque</span>
+          </button>
+          <button class="reels-filter-btn" data-filter="aventura">
+            <span>Rutas & Panoramas</span>
+          </button>
+        </div>
+
+        <!-- Grid de Tarjetas de Reels para Desktop -->
+        <div class="reels-grid-desktop" id="reelsGridDesktop"></div>
+
+        <!-- Botón Ver Todos los Videos -->
+        <div id="verTodosContainer">
+          <button type="button" id="btnVerTodosReels">
+            <span>Ver Todos los Videos (22 Reels)</span>
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg>
+          </button>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ========================================================================
+         MURO FOTOGRÁFICO ESTILO PINTEREST (MOMENTOS FAVORITOS)
+         ======================================================================== -->
+    <section class="pinterest-wall-section">
+      <div class="wall-header">
+        <div class="editorial-tag">Galería Visual</div>
+        <h2 class="wall-title">Mis postales y rincones cotidianos</h2>
+        <p class="wall-subtitle">Fragmentos de vida entre volcanes, lluvia y repostería artesanal en Puerto Varas.</p>
+      </div>
+
+      <div class="masonry-wall">
+        <!-- Pin 1 -->
+        <div class="wall-pin-item">
+          <img class="wall-pin-img" src="https://images.unsplash.com/photo-1501339847302-ac426a4a7cbb?auto=format&fit=crop&w=800&q=80" alt="Küchen recién salido del horno" loading="lazy">
+          <div class="wall-pin-caption">La primera porción de küchen tibio de frambuesa en una tarde fría.</div>
+        </div>
+
+        <!-- Pin 2 -->
+        <div class="wall-pin-item">
+          <img class="wall-pin-img" src="https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?auto=format&fit=crop&w=800&q=80" alt="Volcán Osorno despejado" loading="lazy">
+          <div class="wall-pin-caption">El guardián cónico cuando el viento limpia la cordillera.</div>
+        </div>
+
+        <!-- Pin 3 -->
+        <div class="wall-pin-item">
+          <img class="wall-pin-img" src="https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?auto=format&fit=crop&w=800&q=80" alt="Cena frente al lago" loading="lazy">
+          <div class="wall-pin-caption">Brindar con cerveza artesanal sobre las maderas del lago Llanquihue.</div>
+        </div>
+
+        <!-- Pin 4 -->
+        <div class="wall-pin-item">
+          <img class="wall-pin-img" src="https://images.unsplash.com/photo-1432405972618-c60b0225b8f9?auto=format&fit=crop&w=800&q=80" alt="Río Petrohué color turquesa" loading="lazy">
+          <div class="wall-pin-caption">El agua color esmeralda que parece de fantasía en los Saltos.</div>
+        </div>
+
+        <!-- Pin 5 -->
+        <div class="wall-pin-item">
+          <img class="wall-pin-img" src="https://images.unsplash.com/photo-1544787219-7f47ccb76574?auto=format&fit=crop&w=800&q=80" alt="Té caliente en vajilla de porcelana" loading="lazy">
+          <div class="wall-pin-caption">Infusiones de hierbas silvestres recolectadas en los faldeos del Calbuco.</div>
+        </div>
+
+        <!-- Pin 6 -->
+        <div class="wall-pin-item">
+          <img class="wall-pin-img" src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=800&q=80" alt="Costanera de Puerto Varas al amanecer" loading="lazy">
+          <div class="wall-pin-caption">El silencio absoluto de la costanera a las ocho de la mañana.</div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- ========================================================================
+       DRAWER / MODAL LATERAL "MI RUTA DEL DÍA" (COMPARTIDO)
+       ======================================================================== -->
+  <div class="route-drawer-overlay" id="route-drawer-overlay"></div>
+  
+  <aside class="route-drawer" id="route-drawer" aria-labelledby="drawer-title" role="dialog" aria-modal="true">
+    <div class="drawer-header">
+      <div class="drawer-title-wrap">
+        <h3 id="drawer-title">🗺️ Mi Ruta del Día</h3>
+        <div class="drawer-meta-badges">
+          <span class="drawer-badge" id="drawer-stops-count">0 paradas</span>
+          <span class="drawer-badge" id="drawer-est-time">0 hrs</span>
+        </div>
+      </div>
+      <button class="btn-close-drawer" aria-label="Cerrar cajón de ruta">✕</button>
+    </div>
+
+    <div class="drawer-body">
+      <div class="route-empty-state" id="route-empty-state">
+        <div class="empty-icon">📌</div>
+        <h4 class="empty-title">Aún no tienes paradas guardadas</h4>
+        <p class="empty-desc">Ve a la página principal para pinear tus paradas favoritas en Puerto Varas.</p>
+        <a href="index.html#explorar" class="btn-hero-primary" style="font-size: 0.88rem; padding: 0.7rem 1.4rem;">
+          Explorar lugares
+        </a>
+      </div>
+      <div class="route-stops-list" id="route-stops-list" style="display: none;"></div>
+    </div>
+
+    <div class="drawer-footer" id="route-drawer-footer" style="display: none;">
+      <a href="#" id="btn-open-google-maps" target="_blank" rel="noopener" class="btn-gmaps-full">
+        <span>Abrir ruta completa en Google Maps</span>
+      </a>
+      <a href="#" id="btn-uber-first-stop" target="_blank" rel="noopener" class="btn-uber-first">
+        🚗 Pedir Uber al primer destino
+      </a>
+      <div class="drawer-sub-actions">
+        <button class="btn-clear-all" id="btn-clear-route">Reiniciar mi ruta</button>
+      </div>
+    </div>
+  </aside>
+
+  <!-- ========================================================================
+       FOOTER GLOBAL
+       ======================================================================== -->
+  <footer class="site-footer">
+    <div class="footer-container">
+      <div class="footer-top">
+        <div class="footer-brand">
+          <span class="footer-brand-name">Mamá Santi · Curadora de Turismo</span>
+          <p class="footer-brand-desc">Recomendaciones 100% auténticas e independientes para vivir Puerto Varas como un local.</p>
+        </div>
+        <nav class="footer-nav">
+          <a href="index.html">Explorar</a>
+          <a href="quien-soy.html">Quién Soy</a>
+          <a href="empresa.html">Empresas & Negocios</a>
+          <a href="https://www.instagram.com/datitosdelajose/" target="_blank" rel="noopener">Instagram</a>
+        </nav>
+      </div>
+      <div class="footer-bottom">
+        <span>© 2026 Mamá Santi. Todos los derechos reservados. Puerto Varas, Región de Los Lagos.</span>
+        <span>Hecho con amor sureño y tecnología interactiva.</span>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ========================================================================
+       MODAL DE REEL INTERACTIVO (LAZY IFRAME EMBED INSTAGRAM)
+       ======================================================================== -->
+  <div class="reel-modal" id="reelModal" role="dialog" aria-modal="true">
+    <div class="reel-modal-backdrop" id="reelModalBackdrop"></div>
+    <div class="reel-modal-container">
+      <button class="reel-modal-close" id="reelModalClose" aria-label="Cerrar modal">✕</button>
+      
+      <div class="reel-modal-grid">
+        <!-- Panel Izquierdo: Reproductor de Video Vertical -->
+        <div class="reel-modal-video-pane" id="reelModalMediaBox">
+          <!-- Iframe inyectado dinámicamente -->
+        </div>
+
+        <!-- Panel Derecho: Información, Airbnb y Contacto -->
+        <div class="reel-modal-info-pane">
+          <span class="modal-category-badge" id="reelModalCategory">Cabañas & Airbnb</span>
+          <h3 class="modal-reel-title" id="reelModalTitle">Título del Reel</h3>
+          <div class="modal-reel-lugar" id="reelModalLugar">Lugar / Sector</div>
+
+          <div class="modal-highlight-pill" id="reelModalBadge">Acceso al Lago</div>
+
+          <div class="modal-desc-box" id="reelModalDesc">
+            "Descripción del video..."
+          </div>
+
+          <div class="modal-detalles-box" id="reelModalDetalles">
+            Detalles prácticos, teléfonos y ubicación...
+          </div>
+
+          <!-- Botones de Acción -->
+          <div class="modal-actions-row">
+            <button type="button" class="btn-modal-pin-route" id="reelModalPinBtn">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2">
+                <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/>
+                <circle cx="12" cy="9" r="2.5"/>
+              </svg>
+              <span>📌 Guardar en mi Lista / Itinerario de Viaje</span>
+            </button>
+            <a href="#" target="_blank" rel="noopener" class="btn-airbnb-modal" id="reelModalAirbnbBtn">
+              <span>🏡 Ver Anuncio en Airbnb / Reservar Cabaña</span>
+            </a>
+            <a href="#" target="_blank" rel="noopener" class="btn-wa-modal" id="reelModalWaBtn">
+              <span>💬 Consultar Disponibilidad por WhatsApp</span>
+            </a>
+            <a href="#" target="_blank" rel="noopener" class="btn-ig-modal" id="reelModalIgLink">
+              <span>📸 Ver Reel en Instagram (@datitosdelajose)</span>
+            </a>
+          </div>
+
+          <!-- Otros Reels Recomendados -->
+          <div class="modal-other-reels-header">Más recomendaciones de la Jose:</div>
+          <div class="modal-other-reels-track" id="reelModalOtherReels"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ========================================================================
+       DRAWER / MODAL LATERAL "MI RUTA DEL DÍA" & TABLEROS DE VIAJE
+       ======================================================================== -->
+  <div class="route-drawer-overlay" id="route-drawer-overlay"></div>
+  
+  <aside class="route-drawer" id="route-drawer" aria-labelledby="drawer-title" role="dialog" aria-modal="true">
+    <div class="drawer-header">
+      <div class="drawer-title-wrap">
+        <h3 id="drawer-title">🗺️ Mi Ruta & Listas</h3>
+        <div class="drawer-meta-badges">
+          <span class="drawer-badge" id="drawer-stops-count">0 paradas</span>
+          <span class="drawer-badge" id="drawer-est-time">0 hrs</span>
+        </div>
+      </div>
+      <button class="btn-close-drawer" aria-label="Cerrar cajón de ruta">✕</button>
+    </div>
+
+    <div class="drawer-body">
+      <!-- Estado vacío cuando no hay paradas agregadas -->
+      <div class="route-empty-state" id="route-empty-state">
+        <div class="empty-icon">📌</div>
+        <h4 class="empty-title">Aún no tienes paradas guardadas</h4>
+        <p class="empty-desc">Haz clic en <strong>"Pinear"</strong> en los videos o lugares recomendados de María José para diseñar tu viaje soñado a Puerto Varas.</p>
+        <a href="#reels-showcase" class="btn-hero-primary btn-close-drawer" style="font-size: 0.88rem; padding: 0.7rem 1.4rem; text-decoration:none; display:inline-flex; align-items:center; justify-content:center;">
+          Explorar Reels de la Jose
+        </a>
+      </div>
+
+      <!-- Lista ordenada de paradas -->
+      <div class="route-stops-list" id="route-stops-list" style="display: none;">
+        <!-- Inyectado dinámicamente por route-builder.js -->
+      </div>
+    </div>
+
+    <!-- Footer con CTAs de Navegación -->
+    <div class="drawer-footer" id="route-drawer-footer" style="display: none;">
+      <!-- Inyectado dinámicamente por route-builder.js con Google Calendar, Maps & Uber -->
+    </div>
+  </aside>
+
+  <!-- Scripts -->
+  <script src="js/places-data.js"></script>
+  <script src="js/reels-data.js"></script>
+  <script src="js/reels-showcase.js"></script>
+  <script src="js/route-builder.js"></script>
+  <script src="js/weather-service.js"></script>
+</body>
+</html>
