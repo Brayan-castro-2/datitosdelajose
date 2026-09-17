@@ -213,6 +213,11 @@ function initPlacesApp() {
       setLayout('split');
     }
 
+    const layoutEl = document.getElementById('main-content-layout');
+    if (layoutEl) {
+      layoutEl.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+
     setTimeout(() => {
       mapInstance.flyTo([place.coordinates.lat, place.coordinates.lng], 15, {
         duration: 1.2
@@ -222,7 +227,9 @@ function initPlacesApp() {
       if (marker) {
         marker.openPopup();
       }
-    }, 150);
+
+      highlightCard(placeId);
+    }, 400);
   }
 
   function highlightCard(placeId) {
