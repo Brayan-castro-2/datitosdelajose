@@ -94,6 +94,10 @@
               }
             }
             hideDropdown();
+            const scrollTarget = document.getElementById('main-content-layout');
+            if (scrollTarget) {
+              scrollTarget.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            }
           } else {
             window.location.href = 'index.html?q=' + encodeURIComponent(q);
           }
@@ -231,6 +235,10 @@
           searchInput.value = q;
           searchInput.dispatchEvent(new Event('input'));
           hideDropdown();
+          const scrollTarget = document.getElementById('main-content-layout');
+          if (scrollTarget) {
+            scrollTarget.scrollIntoView({ behavior: 'smooth', block: 'start' });
+          }
         } else {
           window.location.href = 'index.html?q=' + encodeURIComponent(q);
         }
@@ -257,6 +265,10 @@
         searchInput.value = btn.dataset.query;
         searchInput.dispatchEvent(new Event('input'));
         showResults(btn.dataset.query);
+        const scrollTarget = document.getElementById('main-content-layout');
+        if (scrollTarget) {
+          scrollTarget.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
       });
     });
 

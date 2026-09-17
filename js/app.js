@@ -428,7 +428,7 @@ function initPlacesApp() {
     });
     renderCards();
     renderMapMarkers();
-    const explorarEl = document.getElementById('explorar');
+    const explorarEl = document.getElementById('main-content-layout');
     if (explorarEl) {
       explorarEl.scrollIntoView({ behavior: 'smooth', block: 'start' });
     }
