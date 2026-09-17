@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin - Datitos de la Jose</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --primary: #E60023;
+      --surface: #ffffff;
+      --background: #f8f9fa;
+      --text: #111111;
+      --text-muted: #555555;
+      --border: #e9ecef;
+      --radius: 12px;
+      --shadow: 0 4px 12px rgba(0,0,0,0.05);
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Outfit', sans-serif; }
+    body { background-color: var(--background); color: var(--text); display: flex; min-height: 100vh; }
+
+    /* Sidebar */
+    .sidebar {
+      width: 260px;
+      background: var(--surface);
+      border-right: 1px solid var(--border);
+      display: flex;
+      flex-direction: column;
+      padding: 24px;
+    }
+    .brand { display: flex; align-items: center; gap: 12px; font-weight: 700; font-size: 1.1rem; margin-bottom: 40px; }
+    .brand img { width: 32px; height: 32px; border-radius: 50%; object-fit: cover; }
+    .nav-link {
+      display: flex; align-items: center; gap: 12px; padding: 12px; 
+      color: var(--text-muted); text-decoration: none; font-weight: 500; border-radius: 8px; margin-bottom: 8px;
+    }
+    .nav-link:hover { background: var(--background); color: var(--text); }
+    .nav-link.active { background: #ffebee; color: var(--primary); }
+
+    /* Main Content */
+    .main { flex: 1; padding: 40px; overflow-y: auto; }
+    .header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 32px; }
+    .title { font-size: 1.8rem; font-weight: 700; }
+    .btn { 
+      background: var(--primary); color: white; border: none; padding: 12px 24px; 
+      border-radius: 24px; font-weight: 600; cursor: pointer; transition: opacity 0.2s;
+    }
+    .btn:hover { opacity: 0.9; }
+    .btn-secondary { background: white; color: var(--text); border: 1px solid var(--border); }
+
+    /* Card */
+    .card {
+      background: var(--surface); border-radius: var(--radius); box-shadow: var(--shadow);
+      padding: 32px; margin-bottom: 24px; border: 1px solid var(--border);
+    }
+    .card-title { font-size: 1.2rem; font-weight: 600; margin-bottom: 24px; }
+
+    /* Form */
+    .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
+    .form-group { display: flex; flex-direction: column; gap: 8px; }
+    .form-group.full { grid-column: span 2; }
+    label { font-weight: 500; font-size: 0.9rem; color: var(--text-muted); }
+    input, select, textarea {
+      padding: 12px 16px; border: 1px solid var(--border); border-radius: 8px;
+      font-size: 1rem; outline: none; transition: border 0.2s;
+    }
+    input:focus, select:focus, textarea:focus { border-color: var(--primary); }
+
+    /* Table */
+    .table-responsive { overflow-x: auto; }
+    table { width: 100%; border-collapse: collapse; text-align: left; }
+    th, td { padding: 16px; border-bottom: 1px solid var(--border); }
+    th { font-weight: 600; color: var(--text-muted); font-size: 0.85rem; text-transform: uppercase; letter-spacing: 0.5px; }
+    td { font-size: 0.95rem; }
+    .badge { padding: 4px 8px; border-radius: 12px; font-size: 0.75rem; font-weight: 600; }
+    .badge.lugar { background: #e3f2fd; color: #1565c0; }
+    .badge.sorteo { background: #fce4ec; color: #c2185b; }
+    .badge.producto { background: #e8f5e9; color: #2e7d32; }
+  </style>
+</head>
+<body>
+
+  <aside class="sidebar">
+    <div class="brand">
+      <img src="thumbs/profile_jose.png" alt="Logo">
+      Admin Panel
+    </div>
+    <a href="#" class="nav-link active">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline></svg>
+      Dashboard
+    </a>
+    <a href="index.html" class="nav-link">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><line x1="2" y1="12" x2="22" y2="12"></line><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path></svg>
+      Ir a la Web
+    </a>
+  </aside>
+
+  <main class="main">
+    <div class="header">
+      <h1 class="title">Gestión de Publicaciones</h1>
+      <button class="btn" onclick="document.getElementById('addForm').scrollIntoView({behavior: 'smooth'})">+ Nuevo Reel</button>
+    </div>
+
+    <!-- Lista de Publicaciones -->
+    <div class="card">
+      <h2 class="card-title">Últimas Publicaciones</h2>
+      <div class="table-responsive">
+        <table>
+          <thead>
+            <tr>
+              <th>Título</th>
+              <th>Categoría</th>
+              <th>Fecha</th>
+              <th>Acciones</th>
+            </tr>
+          </thead>
+          <tbody id="postsTable">
+            <!-- Mock Data -->
+            <tr>
+              <td><strong>Mirador Cerro Philippi</strong><br><span style="color:var(--text-muted);font-size:0.8rem;">Acceso por calle Phillippi s/n</span></td>
+              <td><span class="badge lugar">📍 Lugar Turístico</span></td>
+              <td>16 Sep 2026</td>
+              <td><button class="btn btn-secondary" style="padding: 6px 12px; font-size: 0.8rem;">Editar</button></td>
+            </tr>
+            <tr>
+              <td><strong>Sorteo Estadía Hotel AWA</strong><br><span style="color:var(--text-muted);font-size:0.8rem;">Sorteo especial de primavera</span></td>
+              <td><span class="badge sorteo">🎁 Sorteo</span></td>
+              <td>14 Sep 2026</td>
+              <td><button class="btn btn-secondary" style="padding: 6px 12px; font-size: 0.8rem;">Editar</button></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- Formulario para Agregar -->
+    <div class="card" id="addForm">
+      <h2 class="card-title">Agregar / Editar Publicación</h2>
+      <p style="color:var(--text-muted); margin-bottom:24px; font-size:0.9rem;">
+        *Este formulario está preparado para ser conectado con Firebase o Supabase.
+      </p>
+      
+      <form class="form-grid" onsubmit="event.preventDefault(); alert('Conectar con Firebase para guardar!');">
+        <div class="form-group full">
+          <label>Link del Reel o Post (Instagram)</label>
+          <input type="url" placeholder="https://www.instagram.com/reel/..." required>
+        </div>
+
+        <div class="form-group">
+          <label>Título Corto</label>
+          <input type="text" placeholder="Ej: Café Cabaña del Lago" required>
+        </div>
+
+        <div class="form-group">
+          <label>Clasificación</label>
+          <select required>
+            <option value="lugar">📍 Lugar Turístico (Mapa)</option>
+            <option value="sorteo">🎁 Sorteo (Novedades)</option>
+            <option value="producto">🛍️ Producto Recomendado</option>
+          </select>
+        </div>
+
+        <div class="form-group full">
+          <label>Recomendación Personal (Resumen)</label>
+          <textarea rows="3" placeholder="Escribe aquí tu tip personal sobre este lugar..."></textarea>
+        </div>
+
+        <div class="form-group">
+          <label>Ubicación / Dirección</label>
+          <input type="text" placeholder="Ej: Costanera 123, Frutillar">
+        </div>
+
+        <div class="form-group">
+          <label>Coordenadas (Latitud, Longitud) *Solo para Mapa</label>
+          <input type="text" placeholder="-41.3182, -72.9823">
+        </div>
+
+        <div class="form-group full" style="margin-top: 16px;">
+          <button type="submit" class="btn">Guardar Publicación</button>
+        </div>
+      </form>
+    </div>
+  </main>
+
+</body>
+</html>

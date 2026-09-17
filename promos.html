@@ -24,8 +24,7 @@
        ======================================================================== -->
   <div class="top-promo-banner" id="topPromoBanner" style="display: none; background: linear-gradient(135deg, #E60023, #ff4060); color: white; padding: 12px 24px; text-align: center; font-size: 0.95rem; font-weight: 600; position: relative; z-index: 1000; box-shadow: 0 4px 12px rgba(230,0,35,0.2);">
     <span class="promo-badge" style="background: rgba(255,255,255,0.2); padding: 4px 8px; border-radius: 12px; margin-right: 8px; font-size: 0.8rem; text-transform: uppercase;">🎁 Sorteo del Mes</span>
-    <span id="topPromoText">¡Gana una noche en Hotel AWA! Participa ahora en la pestaña de Novedades.</span>
-    <a href="promos.html" style="color: white; text-decoration: underline; margin-left: 8px; font-weight: 700;">Ver Sorteo &rarr;</a>
+    <span id="topPromoText">¡Gana una noche en Hotel AWA! Participa abajo.</span>
     <button onclick="document.getElementById('topPromoBanner').style.display='none'" style="position: absolute; right: 16px; top: 50%; transform: translateY(-50%); background: none; border: none; color: white; cursor: pointer; font-size: 1.2rem; opacity: 0.8;">&times;</button>
   </div>
   
@@ -67,17 +66,17 @@
 
       <!-- Navegación Chic -->
       <nav class="nav-links-wrapper">
+        <a href="index.html#Sorteos & Promos-section" class="nav-link-pill">
+          <span>Sorteos & Promos</span>
+        </a>
+        <a href="quien-soy.html" class="nav-link-pill">
+          <span>Quién Soy</span>
+        </a>
         <a href="promos.html" class="nav-link-pill">
           <span>Sorteos & Promos</span>
         </a>
         <a href="index.html#mapa-section" class="nav-link-pill">
           <span>Mapa</span>
-        </a>
-        <a href="quien-soy.html" class="nav-link-pill">
-          <span>Quién Soy</span>
-        </a>
-        <a href="empresa.html" class="nav-link-pill">
-          <span>Empresa</span>
         </a>
       </nav>
 
@@ -170,93 +169,34 @@
         <span class="filter-subtitle" id="places-count-display">Cargando lugares...</span>
       </div>
 
-      <!-- Selector de Vistas -->
-      <div class="view-switcher-group">
-        <button class="view-btn active" data-view="split" title="Ver tarjetas y mapa lado a lado">
-          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-            <rect x="3" y="3" width="8" height="18" rx="2"></rect>
-            <rect x="13" y="3" width="8" height="18" rx="2"></rect>
-          </svg>
-          <span>Split</span>
-        </button>
-        <button class="view-btn" data-view="feed" title="Solo tarjetas estilo Pinterest">
-          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-            <rect x="3" y="3" width="7" height="7"></rect>
-            <rect x="14" y="3" width="7" height="7"></rect>
-            <rect x="14" y="14" width="7" height="7"></rect>
-            <rect x="3" y="14" width="7" height="7"></rect>
-          </svg>
-          <span>Feed</span>
-        </button>
-        <button class="view-btn" data-view="map" title="Solo mapa">
-          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-            <polygon points="1 6 1 22 8 18 16 22 23 18 23 2 16 6 8 2 1 6"></polygon>
-            <line x1="8" y1="2" x2="8" y2="18"></line>
-            <line x1="16" y1="6" x2="16" y2="22"></line>
-          </svg>
-          <span>Mapa</span>
-        </button>
-      </div>
+      <!-- Sin Selector de Vistas -->
     </div>
 
     <!-- Píldoras de Filtro Desplazables -->
     <div class="mood-pills-scroller">
       <button class="mood-pill-btn active" data-category="all">
-        <span>Todos los Rincones</span>
+        <span>Todas las Novedades</span>
       </button>
-      <button class="mood-pill-btn" data-category="lluvia">
-        <span>Cafés & Küchens</span>
+      <button class="mood-pill-btn" data-category="sorteos">
+        <span>🎁 Sorteos Activos</span>
       </button>
-      <button class="mood-pill-btn" data-category="despejado">
-        <span>Día Despejado</span>
+      <button class="mood-pill-btn" data-category="productos">
+        <span>🛍️ Recomendación Productos</span>
       </button>
-      <button class="mood-pill-btn" data-category="tragos">
-        <span>Cena & Tragos</span>
-      </button>
-      <button class="mood-pill-btn" data-category="aventura">
-        <span>Aventura & Naturaleza</span>
-      </button>
-      <button class="mood-pill-btn" data-category="hoteles">
-        <span>Cabañas & Airbnb</span>
+      <button class="mood-pill-btn" data-category="descuentos">
+        <span>🔥 Descuentos y Promos</span>
       </button>
     </div>
   </section>
 
   <!-- ========================================================================
-       SECCIÓN CENTRAL: GRID PINTEREST + MAPA LEAFLET INTERACTIVO
+       SECCIÓN CENTRAL: GRID PINTEREST (Sin Mapa)
        ======================================================================== -->
-  <main class="main-content-layout layout-split" id="main-content-layout">
+  <main class="main-content-layout layout-feed" id="main-content-layout">
     <!-- Grid de Tarjetas Pinterest -->
     <section class="cards-pinterest-grid" id="cards-grid-container">
-      <!-- Inyectado dinámicamente vía app.js -->
+      <!-- Inyectado dinámicamente -->
     </section>
-
-    <!-- Mapa Interactivo Leaflet -->
-    <aside class="map-sticky-wrapper" id="map-sticky-wrapper">
-      <div class="map-header-bar" id="mapa-section">
-        <div class="map-header-title">
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-            <circle cx="12" cy="12" r="10"></circle>
-            <polygon points="16.24 7.76 14.12 14.12 7.76 16.24 9.88 9.88 16.24 7.76"></polygon>
-          </svg>
-          <div>
-            <span style="display:block; font-size: 0.95rem; font-weight:800;">Lago Llanquihue & Puerto Varas</span>
-          </div>
-        </div>
-        <button class="map-reset-zoom-btn" id="btn-reset-map-zoom" title="Centrar en el Lago Llanquihue y Puerto Varas">
-          Centrar Lago
-        </button>
-      </div>
-      
-      <!-- Contenedor del Mapa con Mensaje Flotante de Guía -->
-      <div class="map-canvas-container">
-        <div class="map-floating-pill-hint" id="map-floating-hint">
-          <span class="hint-pulse-dot"></span>
-          <span>Acerca el mapa a donde quieras ir</span>
-        </div>
-        <div id="leaflet-map"></div>
-      </div>
-    </aside>
   </main>
 
   <!-- ========================================================================
@@ -281,7 +221,7 @@
       <div class="route-empty-state" id="route-empty-state">
         <div class="empty-icon"><svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg></div>
         <h4 class="empty-title">Aún no tienes paradas guardadas</h4>
-        <p class="empty-desc">Haz clic en <strong>"+ Agregar a mi ruta"</strong> en cualquier tarjeta o pin del mapa para diseñar tu día perfecto en Puerto Varas.</p>
+        <p class="empty-desc">Haz clic en <strong>"+ Agregar a mi ruta"</strong> en cualquier tarjeta o pin del Sorteos & Promos para diseñar tu día perfecto en Puerto Varas.</p>
         <button class="btn-hero-primary btn-close-drawer" style="font-size: 0.88rem; padding: 0.7rem 1.4rem;">
           Comenzar a explorar
         </button>
