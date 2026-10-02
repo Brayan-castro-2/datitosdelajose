@@ -665,6 +665,25 @@ button, input, textarea, select {
   letter-spacing: 0.02em;
 }
 
+.card-video-pill {
+  position: absolute;
+  bottom: 0.85rem;
+  right: 1rem;
+  background: rgba(225, 48, 108, 0.9);
+  color: #ffffff;
+  padding: 0.3rem 0.65rem;
+  border-radius: var(--radius-pill);
+  font-size: 0.74rem;
+  font-weight: 700;
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  z-index: 2;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+}
+
 /* Cuerpo de la Tarjeta */
 .card-body {
   padding: 1.25rem 1.4rem;
@@ -4129,4 +4148,1542 @@ button, input, textarea, select {
 
 .insta-promise-icon svg {
   color: var(--color-terracotta, #c0392b);
+}
+
+/* ==========================================================================
+   BOTONES DE CONTACTO DIRECTO (INSTAGRAM EMPRESA & WHATSAPP) EN MODALES Y CARDS
+   ========================================================================== */
+.btn-biz-ig-modal {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  padding: 0.9rem 1.5rem;
+  background: linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%);
+  color: #ffffff !important;
+  font-family: var(--font-display);
+  font-size: 0.94rem;
+  font-weight: 700;
+  border-radius: var(--radius-pill);
+  text-decoration: none;
+  box-shadow: 0 4px 16px rgba(220, 39, 67, 0.32);
+  transition: transform var(--transition-fast), filter var(--transition-fast), box-shadow var(--transition-fast);
+  cursor: pointer;
+}
+
+.btn-biz-ig-modal:hover {
+  transform: translateY(-2px);
+  filter: brightness(1.1);
+  box-shadow: 0 6px 20px rgba(220, 39, 67, 0.42);
+}
+
+.btn-biz-wa-modal {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  padding: 0.9rem 1.5rem;
+  background: #25D366;
+  color: #ffffff !important;
+  font-family: var(--font-display);
+  font-size: 0.94rem;
+  font-weight: 700;
+  border-radius: var(--radius-pill);
+  text-decoration: none;
+  box-shadow: 0 4px 16px rgba(37, 211, 102, 0.32);
+  transition: transform var(--transition-fast), filter var(--transition-fast), box-shadow var(--transition-fast);
+  cursor: pointer;
+}
+
+.btn-biz-wa-modal:hover {
+  transform: translateY(-2px);
+  filter: brightness(1.08);
+  box-shadow: 0 6px 20px rgba(37, 211, 102, 0.42);
+}
+
+.card-biz-links-row {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  flex-wrap: wrap;
+  margin: 0.4rem 0 0.6rem;
+}
+
+.card-biz-pill-ig {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 4px 10px;
+  border-radius: var(--radius-pill);
+  background: #FFF1F2;
+  color: #E11D48;
+  font-size: 0.74rem;
+  font-weight: 700;
+  text-decoration: none;
+  transition: all var(--transition-fast);
+  border: 1px solid rgba(225, 29, 72, 0.15);
+}
+
+.card-biz-pill-ig:hover {
+  background: #E11D48;
+  color: #FFFFFF !important;
+  transform: translateY(-1px);
+}
+
+.card-biz-pill-wa {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 4px 10px;
+  border-radius: var(--radius-pill);
+  background: #ECFDF5;
+  color: #059669;
+  font-size: 0.74rem;
+  font-weight: 700;
+  text-decoration: none;
+  transition: all var(--transition-fast);
+  border: 1px solid rgba(5, 150, 105, 0.18);
+}
+
+.card-biz-pill-wa:hover {
+  background: #059669;
+  color: #FFFFFF !important;
+  transform: translateY(-1px);
+}
+
+/* ==========================================================================
+   SCROLL INFINITO (30 EN 30) & SENTINELA
+   ========================================================================== */
+.infinite-scroll-container {
+  grid-column: 1 / -1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 3rem 1rem;
+  gap: 1rem;
+  text-align: center;
+}
+
+.infinite-scroll-count {
+  font-size: 0.92rem;
+  color: var(--color-text-secondary);
+  font-weight: 600;
+  font-family: var(--font-display);
+}
+
+.btn-load-more {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 0.85rem 2.2rem;
+  background: var(--color-text-primary);
+  color: #ffffff;
+  border: none;
+  border-radius: var(--radius-pill);
+  font-family: var(--font-display);
+  font-size: 0.92rem;
+  font-weight: 700;
+  cursor: pointer;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
+  transition: all var(--transition-fast);
+}
+
+.btn-load-more:hover {
+  background: var(--color-pin-red);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(230, 0, 35, 0.28);
+}
+
+/* ==========================================================================
+   RESPONSIVIDAD Y OPTIMIZACIÓN 100% PARA MÓVILES Y TABLETS
+   ========================================================================== */
+@media (max-width: 1024px) {
+  .layout-split {
+    grid-template-columns: 1fr;
+  }
+  .map-sticky-wrapper {
+    position: relative;
+    top: 0;
+    margin-top: 2rem;
+    height: 480px;
+  }
+  .cards-pinterest-grid {
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  }
+}
+
+@media (max-width: 768px) {
+  .header-container {
+    padding: 0.6rem 1rem;
+    gap: 0.75rem;
+  }
+  .brand-title {
+    font-size: 1.05rem;
+  }
+  .main-content-layout {
+    padding: 0 1rem;
+    margin-bottom: 2.5rem;
+  }
+  .cards-pinterest-grid {
+    grid-template-columns: 1fr;
+    gap: 1.25rem;
+  }
+  .filter-section {
+    padding: 1rem;
+  }
+  .filter-section-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.75rem;
+  }
+  .mood-pills-scroller {
+    padding-bottom: 0.5rem;
+    gap: 0.4rem;
+  }
+  .mood-pill-btn {
+    padding: 0.45rem 0.9rem;
+    font-size: 0.8rem;
+  }
+  .modal-actions-row {
+    gap: 0.6rem;
+  }
+  .btn-biz-ig-modal,
+  .btn-biz-wa-modal,
+  .btn-airbnb-modal,
+  .btn-modal-pin-route {
+    width: 100%;
+    padding: 0.85rem 1.2rem;
+    font-size: 0.88rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .hero-slide-content h1 {
+    font-size: 1.6rem;
+    line-height: 1.2;
+  }
+  .card-image-wrap {
+    height: 220px;
+  }
+  .card-actions-row {
+    flex-wrap: wrap;
+  }
+}
+
+
+
+/* ==========================================================================
+   CAMINITO ROJO INTERACTIVO EN EL MAPA & PINES NUMERADOS (Wanderlog Style)
+   ========================================================================== */
+@keyframes flowRouteDash {
+  to {
+    stroke-dashoffset: -44;
+  }
+}
+
+.animated-route-polyline {
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  animation: flowRouteDash 1.2s linear infinite;
+  filter: drop-shadow(0 2px 6px rgba(230, 0, 35, 0.4));
+}
+
+.route-sequence-marker-container {
+  background: transparent;
+  border: none;
+}
+
+.route-number-badge {
+  width: 32px;
+  height: 32px;
+  background: linear-gradient(135deg, #E60023 0%, #B8001B 100%);
+  color: #ffffff;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 800;
+  font-size: 0.95rem;
+  font-family: var(--font-display, sans-serif);
+  box-shadow: 0 4px 14px rgba(230, 0, 35, 0.5), 0 0 0 3px #ffffff;
+  position: relative;
+  cursor: pointer;
+  transition: transform 0.2s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.route-number-badge:hover {
+  transform: scale(1.18);
+}
+
+.route-number-badge::after {
+  content: '';
+  position: absolute;
+  top: -3px;
+  left: -3px;
+  right: -3px;
+  bottom: -3px;
+  border-radius: 50%;
+  border: 2px solid #E60023;
+  animation: pulseRouteRing 2s cubic-bezier(0.24, 0, 0.38, 1) infinite;
+  pointer-events: none;
+}
+
+@keyframes pulseRouteRing {
+  0% { transform: scale(1); opacity: 0.9; }
+  60% { transform: scale(1.6); opacity: 0; }
+  100% { transform: scale(1.6); opacity: 0; }
+}
+
+.map-floating-route-summary {
+  position: absolute;
+  top: 14px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 800;
+  background: rgba(255, 255, 255, 0.96);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1.5px solid #E60023;
+  border-radius: 9999px;
+  padding: 0.5rem 1rem;
+  box-shadow: 0 10px 25px rgba(230, 0, 35, 0.2);
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  font-size: 0.84rem;
+  color: #191c1f;
+  animation: slideDownSummary 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  white-space: nowrap;
+}
+
+.map-sticky-wrapper > .map-floating-route-summary {
+  top: 68px !important;
+}
+
+.map-canvas-container .map-floating-route-summary {
+  top: 14px !important;
+}
+
+.map-canvas-container .map-floating-route-summary:not([style*="display: none"]) ~ #map-floating-hint,
+.map-canvas-container .map-floating-route-summary:not([style*="display: none"]) ~ .map-floating-pill-hint {
+  display: none !important;
+}
+
+@keyframes slideDownSummary {
+  from { opacity: 0; transform: translate(-50%, -12px); }
+  to { opacity: 1; transform: translate(-50%, 0); }
+}
+
+.btn-fit-route {
+  background: #E60023;
+  color: white;
+  border: none;
+  border-radius: 9999px;
+  padding: 0.3rem 0.75rem;
+  font-size: 0.75rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background 0.2s ease, transform 0.15s ease;
+}
+
+.btn-fit-route:hover {
+  background: #b8001b;
+  transform: scale(1.04);
+}
+
+/* Botón flotante móvil para alternar Vista Lista / Mapa */
+.mobile-map-view-toggle {
+  display: none;
+}
+
+/* ==========================================================================
+   OVERHAUL COMPLETO DE MODO RESPONSIVE (MÓVIL & TABLET)
+   ========================================================================== */
+@media (max-width: 900px) {
+  .site-header {
+    padding: 0.35rem 0 !important;
+  }
+  
+  .header-container {
+    display: flex !important;
+    flex-direction: row !important;
+    flex-wrap: wrap !important;
+    align-items: center !important;
+    justify-content: space-between !important;
+    gap: 0.35rem 0.5rem !important;
+    padding: 0.35rem 0.85rem !important;
+  }
+
+  .btn-side-menu-toggle {
+    display: inline-flex !important;
+    order: 1 !important;
+    margin: 0 !important;
+    width: 38px !important;
+    height: 38px !important;
+    min-width: 38px !important;
+    border-radius: 50% !important;
+    background: #f4f2ee !important;
+    border: 1px solid #e2ded7 !important;
+    color: #191c1f !important;
+    align-items: center !important;
+    justify-content: center !important;
+    flex-shrink: 0 !important;
+    cursor: pointer !important;
+  }
+
+  .brand-wrapper {
+    order: 2 !important;
+    display: flex !important;
+    align-items: center !important;
+    gap: 0.5rem !important;
+    margin-right: auto !important;
+    margin-left: 0.25rem !important;
+    flex-shrink: 1 !important;
+    min-width: 0 !important;
+  }
+
+  .brand-icon {
+    width: 36px !important;
+    height: 36px !important;
+    flex-shrink: 0 !important;
+  }
+
+  .brand-title {
+    font-size: 0.98rem !important;
+    white-space: nowrap !important;
+  }
+
+  .brand-subtitle {
+    display: none !important;
+  }
+
+  .btn-route-toggle,
+  #btn-header-route {
+    order: 3 !important;
+    display: inline-flex !important;
+    padding: 0.45rem 0.85rem !important;
+    font-size: 0.82rem !important;
+    gap: 0.35rem !important;
+    flex-shrink: 0 !important;
+    margin: 0 !important;
+  }
+
+  .search-bar-wrapper {
+    order: 4 !important;
+    width: 100% !important;
+    flex: 0 0 100% !important;
+    margin-top: 0.2rem !important;
+  }
+
+  .nav-links-wrapper,
+  .header-weather-widget-slot {
+    display: none !important;
+  }
+
+  .search-bar-wrapper {
+    width: 100%;
+    max-width: 100%;
+    margin: 0;
+  }
+
+  .search-input-box {
+    height: 42px;
+    font-size: 0.88rem;
+    padding-left: 2.6rem;
+  }
+
+  .nav-links-wrapper {
+    display: none !important;
+  }
+
+  /* Carrusel Hero en Tablet/Móvil */
+  .hero-section {
+    padding: 0.5rem 1rem 1rem;
+  }
+
+  .hero-carousel-container {
+    height: 380px;
+    border-radius: 20px;
+  }
+
+  .hero-content {
+    padding: 1.5rem 1.25rem;
+  }
+
+  .hero-tag {
+    font-size: 0.75rem;
+    padding: 0.25rem 0.65rem;
+    margin-bottom: 0.6rem;
+  }
+
+  .hero-title {
+    font-size: 1.5rem;
+    line-height: 1.25;
+    margin-bottom: 0.5rem;
+  }
+
+  .hero-subtitle {
+    font-size: 0.88rem;
+    line-height: 1.4;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    margin-bottom: 1.2rem;
+  }
+
+  .hero-cta-group {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0.5rem;
+  }
+
+  .btn-hero-primary, .btn-hero-secondary {
+    justify-content: center;
+    padding: 0.75rem 1.2rem;
+    font-size: 0.88rem;
+    width: 100%;
+  }
+
+  /* Sección de Filtros */
+  .filter-section {
+    padding: 1rem 1rem 0.5rem;
+  }
+
+  .filter-section-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.5rem;
+  }
+
+  .view-switcher-group {
+    display: none; /* En móvil se controla con el botón flotante */
+  }
+
+  .mood-pills-scroller {
+    padding: 0.3rem 0 0.8rem;
+    gap: 0.45rem;
+    scrollbar-width: none;
+  }
+
+  .mood-pills-scroller::-webkit-scrollbar {
+    display: none;
+  }
+
+  .mood-pill-btn {
+    padding: 0.45rem 0.85rem;
+    font-size: 0.82rem;
+    white-space: nowrap;
+    border-radius: 9999px;
+  }
+
+  /* Grilla Pinterest en Móvil */
+  .layout-split {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+    padding: 0 1rem;
+    margin-bottom: 5rem;
+  }
+
+  .cards-pinterest-grid {
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 1.2rem;
+  }
+
+  .card-img {
+    height: 220px;
+  }
+
+  .card-body {
+    padding: 1rem;
+  }
+
+  .card-title {
+    font-size: 1.15rem;
+  }
+
+  /* Mapa Sticky en Móvil */
+  .map-sticky-wrapper {
+    position: relative;
+    top: 0;
+    height: 380px;
+    border-radius: 20px;
+    margin-top: 1rem;
+    order: 2;
+  }
+
+  /* Alternar vista con clase .mobile-view-map */
+  .main-content-layout.mobile-view-map .cards-pinterest-grid {
+    display: none !important;
+  }
+
+  .main-content-layout.mobile-view-map .map-sticky-wrapper {
+    height: 75vh;
+    margin-top: 0;
+    position: sticky;
+    top: 90px;
+  }
+
+  /* Botón Flotante para cambiar entre Mapa y Lista en Celular */
+  .mobile-map-view-toggle {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    position: fixed;
+    bottom: 24px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 990;
+    background: #191c1f;
+    color: #ffffff;
+    border: none;
+    border-radius: 9999px;
+    padding: 0.8rem 1.6rem;
+    font-size: 0.95rem;
+    font-weight: 800;
+    box-shadow: 0 10px 28px rgba(0, 0, 0, 0.4), 0 0 0 1px rgba(255, 255, 255, 0.15);
+    cursor: pointer;
+    transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1), background 0.2s ease;
+  }
+
+  .mobile-map-view-toggle:active {
+    transform: translateX(-50%) scale(0.95);
+  }
+
+  /* Drawer Mi Ruta a ancho completo en móviles */
+  .route-drawer {
+    width: 100vw;
+    max-width: 100vw;
+  }
+
+  .drawer-footer {
+    position: sticky;
+    bottom: 0;
+    background: #ffffff;
+    box-shadow: 0 -8px 24px rgba(0, 0, 0, 0.08);
+  }
+}
+
+@media (max-width: 540px) {
+  .cards-pinterest-grid {
+    grid-template-columns: 1fr;
+    max-width: 440px;
+    margin: 0 auto;
+  }
+  
+  .card-img {
+    height: 200px;
+  }
+
+  .header-weather-widget-slot {
+    display: none; /* Mantener limpio en pantallas muy estrechas */
+  }
+
+  .site-header {
+    border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+  }
+
+  .brand-title {
+    font-size: 0.98rem;
+  }
+
+  .btn-route-toggle {
+    padding: 0.45rem 0.85rem;
+    font-size: 0.8rem;
+  }
+}
+
+
+/* Flex Ordering para Header Móvil Limpio y Organizado */
+@media (max-width: 900px) {
+  .site-header {
+    padding: 0.5rem 0 !important;
+  }
+  .header-container {
+    display: flex !important;
+    flex-wrap: wrap !important;
+    align-items: center !important;
+    justify-content: space-between !important;
+    padding: 0.5rem 1rem !important;
+    gap: 0.5rem !important;
+  }
+  .brand-wrapper {
+    order: 1 !important;
+    flex: 0 1 auto !important;
+  }
+  .header-weather-widget-slot {
+    order: 2 !important;
+    margin-left: auto !important;
+  }
+  #btn-header-route, .btn-route-toggle {
+    order: 3 !important;
+    flex-shrink: 0 !important;
+  }
+  .search-bar-wrapper {
+    order: 4 !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    margin: 0.2rem 0 !important;
+  }
+  .nav-links-wrapper {
+    order: 5 !important;
+    width: 100% !important;
+    display: flex !important;
+    overflow-x: auto !important;
+    padding: 0.2rem 0 !important;
+    gap: 0.5rem !important;
+    scrollbar-width: none !important;
+    -webkit-overflow-scrolling: touch !important;
+  }
+}
+
+
+/* ==========================================================================
+   ESTILOS COMERCIALES: TARIFARIO B2B, PLANES Y BANNERS DE COLABORADORES
+   ========================================================================== */
+.b2b-pricing-section {
+  max-width: 1200px;
+  margin: 3.5rem auto 2.5rem;
+  padding: 0 1.5rem;
+}
+
+.pricing-header-box {
+  text-align: center;
+  max-width: 720px;
+  margin: 0 auto 3rem;
+}
+
+.pricing-main-title {
+  font-family: var(--font-display, sans-serif);
+  font-size: 2.2rem;
+  font-weight: 800;
+  color: #191c1f;
+  margin: 0.6rem 0;
+  line-height: 1.2;
+}
+
+.pricing-main-subtitle {
+  color: var(--color-text-secondary, #5a626a);
+  font-size: 1.05rem;
+  line-height: 1.5;
+}
+
+.b2b-pricing-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.8rem;
+  align-items: stretch;
+}
+
+.pricing-card {
+  background: #ffffff;
+  border: 1.5px solid #edece9;
+  border-radius: 22px;
+  padding: 2.2rem 1.8rem;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.3s ease;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.04);
+}
+
+.pricing-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 18px 36px rgba(0, 0, 0, 0.08);
+}
+
+.pricing-card-featured {
+  border-color: #E60023;
+  box-shadow: 0 14px 40px rgba(230, 0, 35, 0.12);
+  background: linear-gradient(180deg, #ffffff 0%, #fffbfb 100%);
+  position: relative;
+}
+
+.pricing-popular-ribbon {
+  position: absolute;
+  top: -14px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: #E60023;
+  color: #ffffff;
+  font-size: 0.78rem;
+  font-weight: 800;
+  padding: 0.3rem 0.9rem;
+  border-radius: 9999px;
+  letter-spacing: 0.5px;
+  box-shadow: 0 4px 12px rgba(230, 0, 35, 0.3);
+}
+
+.pricing-badge-tier {
+  font-size: 0.78rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  color: #8c959f;
+  letter-spacing: 0.8px;
+  margin-bottom: 0.4rem;
+}
+
+.pricing-tier-name {
+  font-family: var(--font-display, sans-serif);
+  font-size: 1.45rem;
+  font-weight: 800;
+  color: #191c1f;
+  margin-bottom: 0.75rem;
+}
+
+.pricing-price-wrap {
+  display: flex;
+  align-items: baseline;
+  gap: 4px;
+  margin-bottom: 1rem;
+}
+
+.pricing-currency {
+  font-size: 1.3rem;
+  font-weight: 800;
+  color: #E60023;
+}
+
+.pricing-amount {
+  font-size: 2.6rem;
+  font-weight: 800;
+  font-family: var(--font-display, sans-serif);
+  color: #191c1f;
+  line-height: 1;
+}
+
+.pricing-period {
+  font-size: 0.88rem;
+  color: #8c959f;
+  font-weight: 600;
+}
+
+.pricing-desc {
+  font-size: 0.9rem;
+  color: var(--color-text-secondary, #5a626a);
+  line-height: 1.4;
+  margin-bottom: 1.5rem;
+  min-height: 48px;
+}
+
+.pricing-features-list {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  flex-grow: 1;
+}
+
+.pricing-features-list li {
+  font-size: 0.88rem;
+  color: #333;
+  line-height: 1.4;
+}
+
+.pricing-features-list strong {
+  color: #191c1f;
+}
+
+.btn-pricing-cta {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.9rem 1.4rem;
+  border-radius: 9999px;
+  font-weight: 800;
+  font-size: 0.95rem;
+  text-decoration: none;
+  transition: all 0.2s ease;
+  text-align: center;
+}
+
+.btn-pricing-primary {
+  background: #E60023;
+  color: #ffffff;
+  box-shadow: 0 6px 18px rgba(230, 0, 35, 0.28);
+}
+
+.btn-pricing-primary:hover {
+  background: #b8001b;
+  transform: scale(1.02);
+}
+
+.btn-pricing-secondary {
+  background: #f4f2ee;
+  color: #191c1f;
+  border: 1px solid #edece9;
+}
+
+.btn-pricing-secondary:hover {
+  background: #191c1f;
+  color: #ffffff;
+}
+
+/* Banner de Captación en promos.html */
+.promos-partner-cta-banner {
+  max-width: 1440px;
+  margin: 2.5rem auto 3.5rem;
+  padding: 2.2rem 2.5rem;
+  background: linear-gradient(135deg, #FFF5F5 0%, #FFF0F0 100%);
+  border: 1.5px solid #FFD4D4;
+  border-radius: 22px;
+  text-align: center;
+}
+
+.partner-cta-badge {
+  display: inline-block;
+  background: #E60023;
+  color: white;
+  font-size: 0.78rem;
+  font-weight: 800;
+  padding: 0.25rem 0.8rem;
+  border-radius: 9999px;
+  margin-bottom: 0.75rem;
+}
+
+.partner-cta-title {
+  font-family: var(--font-display, sans-serif);
+  font-size: 1.6rem;
+  font-weight: 800;
+  color: #191c1f;
+  margin-bottom: 0.6rem;
+}
+
+.partner-cta-desc {
+  max-width: 780px;
+  margin: 0 auto 1.5rem;
+  font-size: 0.95rem;
+  color: #4b5563;
+  line-height: 1.5;
+}
+
+.partner-cta-btns {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.btn-partner-whatsapp {
+  background: #25D366;
+  color: #ffffff;
+  padding: 0.85rem 1.6rem;
+  border-radius: 9999px;
+  font-weight: 800;
+  font-size: 0.92rem;
+  text-decoration: none;
+  box-shadow: 0 6px 18px rgba(37, 211, 102, 0.3);
+  transition: transform 0.2s ease;
+}
+
+.btn-partner-whatsapp:hover {
+  transform: scale(1.03);
+}
+
+.btn-partner-planes {
+  background: #ffffff;
+  color: #191c1f;
+  border: 1.5px solid #edece9;
+  padding: 0.85rem 1.4rem;
+  border-radius: 9999px;
+  font-weight: 700;
+  font-size: 0.92rem;
+  text-decoration: none;
+  transition: background 0.2s ease;
+}
+
+.btn-partner-planes:hover {
+  background: #f4f2ee;
+}
+
+/* Banner de Red Oficial en index.html */
+.official-collab-section {
+  max-width: 1440px;
+  margin: 2rem auto 4rem;
+  padding: 0 1.5rem;
+}
+
+.official-collab-container {
+  background: #ffffff;
+  border: 1.5px solid #edece9;
+  border-radius: 22px;
+  padding: 2.2rem 2.5rem;
+  text-align: center;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.04);
+}
+
+.official-collab-badge {
+  display: inline-block;
+  background: #faeee9;
+  color: #c85a32;
+  font-size: 0.8rem;
+  font-weight: 800;
+  padding: 0.3rem 0.85rem;
+  border-radius: 9999px;
+  margin-bottom: 0.75rem;
+}
+
+.official-collab-title {
+  font-family: var(--font-display, sans-serif);
+  font-size: 1.5rem;
+  font-weight: 800;
+  color: #191c1f;
+  margin-bottom: 0.5rem;
+}
+
+.official-collab-desc {
+  max-width: 780px;
+  margin: 0 auto 1.5rem;
+  font-size: 0.95rem;
+  color: #5a626a;
+  line-height: 1.5;
+}
+
+.official-collab-actions {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.btn-collab-cta {
+  background: #E60023;
+  color: #ffffff;
+  padding: 0.85rem 1.5rem;
+  border-radius: 9999px;
+  font-weight: 800;
+  font-size: 0.92rem;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  transition: transform 0.2s ease, background 0.2s ease;
+}
+
+.btn-collab-cta:hover {
+  background: #b8001b;
+  transform: scale(1.03);
+}
+
+.btn-collab-wa {
+  background: #f4f2ee;
+  color: #191c1f;
+  padding: 0.85rem 1.4rem;
+  border-radius: 9999px;
+  font-weight: 700;
+  font-size: 0.92rem;
+  text-decoration: none;
+  border: 1px solid #edece9;
+  transition: background 0.2s ease;
+}
+
+.btn-collab-wa:hover {
+  background: #e8e6e1;
+}
+
+/* Responsiveness para el tarifario comercial */
+@media (max-width: 992px) {
+  .b2b-pricing-grid {
+    grid-template-columns: 1fr;
+    max-width: 480px;
+    margin: 0 auto;
+  }
+}
+
+/* ==========================================================================
+   BARRA DE NAVEGACIÓN MÓVIL ESTILO SPOTIFY (ONE-THUMB NAVIGATION)
+   ========================================================================== */
+.spotify-bottom-nav {
+  display: none;
+}
+
+@media (max-width: 860px) {
+  .spotify-bottom-nav {
+    display: flex;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 64px;
+    background: rgba(18, 18, 20, 0.94);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border-top: 1px solid rgba(255, 255, 255, 0.08);
+    z-index: 9999;
+    align-items: center;
+    justify-content: space-around;
+    padding: 0 0.5rem;
+    padding-bottom: env(safe-area-inset-bottom, 0px);
+    box-shadow: 0 -8px 30px rgba(0, 0, 0, 0.35);
+  }
+
+  /* Ocultar el viejo botón flotante */
+  .mobile-map-view-toggle {
+    display: none !important;
+  }
+
+  /* Espaciado inferior del body para no tapar contenido */
+  body {
+    padding-bottom: calc(72px + env(safe-area-inset-bottom, 0px)) !important;
+  }
+
+  .s-nav-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 4px;
+    background: transparent;
+    border: none;
+    color: rgba(255, 255, 255, 0.55);
+    text-decoration: none;
+    font-family: var(--font-body, -apple-system, BlinkMacSystemFont, sans-serif);
+    font-size: 0.72rem;
+    font-weight: 600;
+    letter-spacing: 0.02em;
+    cursor: pointer;
+    padding: 8px 14px;
+    min-width: 64px;
+    height: 100%;
+    transition: color 0.2s ease, transform 0.15s ease;
+    user-select: none;
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  .s-nav-item:active {
+    transform: scale(0.92);
+  }
+
+  .s-nav-item.active {
+    color: #ffffff;
+  }
+
+  .s-nav-item.active .s-nav-icon {
+    color: #E60023; /* Acento cereza elegante */
+  }
+
+  .s-nav-icon-wrapper {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .s-route-badge {
+    position: absolute;
+    top: -5px;
+    right: -10px;
+    background: #E60023;
+    color: #ffffff;
+    font-size: 0.65rem;
+    font-weight: 800;
+    min-width: 16px;
+    height: 16px;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0 4px;
+    border: 1.5px solid #121214;
+    line-height: 1;
+  }
+}
+
+/* ==========================================================================
+   MENÚ LATERAL CHIC (OFF-CANVAS EDITORIAL)
+   ========================================================================== */
+.side-menu-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(18, 22, 26, 0.45);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  z-index: 99998;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.3s ease, visibility 0.3s ease;
+}
+
+.side-menu-overlay.is-open {
+  opacity: 1;
+  visibility: visible;
+}
+
+.side-menu-drawer {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  width: 100%;
+  max-width: 360px;
+  background: #ffffff;
+  z-index: 99999;
+  box-shadow: -10px 0 35px rgba(0, 0, 0, 0.18);
+  display: flex;
+  flex-direction: column;
+  transform: translateX(100%);
+  transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.side-menu-drawer.is-open {
+  transform: translateX(0);
+}
+
+.side-menu-header {
+  padding: 1.25rem 1.5rem;
+  border-bottom: 1px solid var(--color-border, #edece9);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: #faf9f6;
+}
+
+.side-menu-brand {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.side-menu-avatar {
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid var(--color-pin-red, #E60023);
+}
+
+.side-menu-name {
+  font-family: var(--font-display, sans-serif);
+  font-size: 1.05rem;
+  font-weight: 800;
+  color: var(--color-text-primary, #191c1f);
+  margin: 0;
+}
+
+.side-menu-handle {
+  font-size: 0.78rem;
+  color: #71717a;
+  font-weight: 600;
+}
+
+.btn-close-side-menu {
+  background: #ffffff;
+  border: 1px solid #e4e4e7;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  color: #52525b;
+  transition: background 0.2s ease, transform 0.15s ease;
+}
+
+.btn-close-side-menu:hover {
+  background: #000;
+  color: #fff;
+}
+
+.side-menu-body {
+  padding: 1.5rem;
+  overflow-y: auto;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.side-menu-section-title {
+  font-size: 0.75rem;
+  font-weight: 800;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: #a1a1aa;
+  margin-bottom: -0.5rem;
+}
+
+.side-menu-nav {
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+}
+
+.side-nav-link {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 0.85rem 1rem;
+  border-radius: 16px;
+  background: #faf9f6;
+  border: 1px solid #f0eee9;
+  text-decoration: none;
+  color: #191c1f;
+  transition: background 0.2s ease, transform 0.15s ease, border-color 0.2s ease;
+}
+
+.side-nav-link:hover,
+.side-nav-link:active {
+  background: #ffffff;
+  border-color: #e4e4e7;
+  transform: translateX(-3px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+}
+
+.side-nav-link svg {
+  color: var(--color-pin-red, #E60023);
+  flex-shrink: 0;
+}
+
+.side-nav-text {
+  display: flex;
+  flex-direction: column;
+}
+
+.side-nav-text strong {
+  font-size: 0.92rem;
+  font-weight: 700;
+  color: #18181b;
+}
+
+.side-nav-text span {
+  font-size: 0.75rem;
+  color: #71717a;
+  margin-top: 2px;
+}
+
+.badge-promo-pill {
+  display: inline-block;
+  background: #fee2e2;
+  color: #dc2626 !important;
+  font-weight: 700 !important;
+  padding: 2px 8px;
+  border-radius: 12px;
+  font-size: 0.7rem !important;
+  margin-top: 4px !important;
+  width: fit-content;
+}
+
+.side-menu-socials {
+  margin-top: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+  padding-top: 1rem;
+  border-top: 1px solid #f4f2ee;
+}
+
+.side-social-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.75rem 1rem;
+  border-radius: 9999px;
+  font-size: 0.85rem;
+  font-weight: 700;
+  text-decoration: none;
+}
+
+.side-social-btn.ig {
+  background: linear-gradient(45deg, #f09433 0%, #dc2743 50%, #bc1888 100%);
+  color: #ffffff;
+}
+
+.side-social-btn.wa {
+  background: #25D366;
+  color: #ffffff;
+}
+
+/* Botón de Menú Chic en Header */
+.btn-side-menu-toggle {
+  display: none;
+  background: #faf9f6;
+  border: 1px solid #e4e4e7;
+  padding: 0.55rem;
+  border-radius: 50%;
+  cursor: pointer;
+  align-items: center;
+  justify-content: center;
+  color: #18181b;
+  transition: background 0.2s ease, transform 0.15s ease;
+}
+
+.btn-side-menu-toggle:hover {
+  background: #ffffff;
+  transform: scale(1.05);
+}
+
+/* ==========================================================================
+   AJUSTES RESPONSIVE MÓVIL EXACTOS (< 860px)
+   ========================================================================== */
+@media (max-width: 860px) {
+  /* Mostrar botón de menú chic en header a la izquierda */
+  .btn-side-menu-toggle {
+    display: inline-flex !important;
+    order: 1 !important;
+  }
+
+  .brand-wrapper {
+    order: 2 !important;
+  }
+
+  .btn-route-toggle,
+  #btn-header-route {
+    order: 3 !important;
+  }
+
+  .nav-links-wrapper {
+    display: none !important;
+  }
+
+  .header-container {
+    display: flex !important;
+    flex-direction: row !important;
+    flex-wrap: wrap !important;
+    align-items: center !important;
+    justify-content: space-between !important;
+    gap: 0.35rem 0.5rem !important;
+    padding: 0.35rem 0.85rem !important;
+  }
+
+  .search-bar-wrapper {
+    order: 4 !important;
+    width: 100% !important;
+    margin-top: 0.2rem !important;
+  }
+
+  /* Drawer de Ruta: termina ARRIBA de la barra de Spotify */
+  .route-drawer {
+    top: 0 !important;
+    bottom: calc(64px + env(safe-area-inset-bottom, 0px)) !important;
+    height: auto !important;
+    max-height: calc(100vh - 64px - env(safe-area-inset-bottom, 0px)) !important;
+    box-shadow: 0 -8px 30px rgba(0, 0, 0, 0.3) !important;
+    border-radius: 0 0 20px 20px !important;
+  }
+
+  .drawer-footer {
+    padding-bottom: 1.25rem !important;
+    background: #ffffff !important;
+  }
+
+  /* Toast de notificación: siempre arriba de la barra de Spotify */
+  .toast-container {
+    left: 1rem !important;
+    right: 1rem !important;
+    bottom: calc(76px + env(safe-area-inset-bottom, 0px)) !important;
+    z-index: 10005 !important;
+  }
+
+  /* Mapa: Ocultar píldora flotante que tapa los comercios seleccionados */
+  .map-floating-pill-hint {
+    display: none !important;
+  }
+
+  /* Mapa altura cómoda en móvil */
+  .map-sticky-wrapper {
+    height: 480px !important;
+    border-radius: 20px !important;
+  }
+
+  /* Popup de Leaflet en móvil: más compacto para no tapar los controles */
+  .leaflet-popup-content-wrapper {
+    max-height: 340px !important;
+    overflow-y: auto !important;
+    border-radius: 18px !important;
+  }
+
+  .popup-img {
+    height: 100px !important;
+  }
+
+  .popup-card-content {
+    width: 250px !important;
+  }
+}
+
+/* Botones de Mapa y Google Maps en Card */
+.btn-card-map-action {
+  background: #f4f2ee;
+  color: #191c1f;
+  border: 1px solid #e2ded7;
+  padding: 0.45rem 0.7rem;
+  border-radius: var(--radius-pill, 9999px);
+  font-size: 0.78rem;
+  font-weight: 700;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: background 0.15s ease, transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+.btn-card-map-action:hover,
+.btn-card-map-action:active {
+  background: #e8e4dc;
+  transform: translateY(-1px);
+}
+
+.btn-card-map-action.is-map-view {
+  background: #ecfdf5;
+  color: #065f46;
+  border-color: #a7f3d0;
+}
+.btn-card-map-action.is-map-view:hover {
+  background: #d1fae5;
+}
+
+.btn-card-map-action.is-gmaps {
+  background: #eff6ff;
+  color: #1e40af;
+  border-color: #bfdbfe;
+}
+.btn-card-map-action.is-gmaps:hover {
+  background: #dbeafe;
+}
+
+@media (max-width: 860px) {
+  .layout-map .map-sticky-wrapper {
+    height: calc(100vh - 145px) !important;
+    min-height: 480px !important;
+    margin-top: 0.5rem;
+    order: 1;
+    position: relative !important;
+  }
+}
+
+
+
+
+/* ==========================================================================
+   ESTILOS MAPA: PINES CON EMOTES Y CLUSTERING INTELIGENTE
+   ========================================================================== */
+.custom-emote-pin {
+  transition: transform 0.2s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.2s ease;
+  user-select: none;
+}
+
+.custom-emote-pin:hover,
+.custom-emote-pin:active {
+  transform: rotate(-45deg) scale(1.2) !important;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4) !important;
+  z-index: 1000 !important;
+}
+
+.custom-map-cluster-bubble {
+  transition: transform 0.2s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.2s ease;
+  user-select: none;
+}
+
+.custom-map-cluster-bubble:hover,
+.custom-map-cluster-bubble:active {
+  transform: scale(1.15) !important;
+  box-shadow: 0 8px 26px rgba(0, 0, 0, 0.42) !important;
 }

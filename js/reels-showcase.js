@@ -203,7 +203,7 @@ function openReelModal(id) {
       <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
         ${isSaved ? '<polyline points="20 6 9 17 4 12"></polyline>' : '<line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line>'}
       </svg>
-      <span>${isSaved ? '✓ En tu ruta de viaje' : '+ Agregar a mi ruta'}</span>
+      <span>${isSaved ? 'En tu ruta de viaje' : 'Agregar a mi ruta'}</span>
     `;
     pinBtn.onclick = () => {
       if (window.routeManager) {
@@ -213,7 +213,7 @@ function openReelModal(id) {
           <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
             ${nowSaved ? '<polyline points="20 6 9 17 4 12"></polyline>' : '<line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line>'}
           </svg>
-          <span>${nowSaved ? '✓ En tu ruta de viaje' : '+ Agregar a mi ruta'}</span>
+          <span>${nowSaved ? 'En tu ruta de viaje' : 'Agregar a mi ruta'}</span>
         `;
       }
     };
@@ -237,21 +237,72 @@ function openReelModal(id) {
     `).join('');
   }
 
-  // Inyectar el Iframe oficial de Instagram
+  // Inyectar Reproductor Nativo de Video o Iframe de Respaldo
   const mediaBox = document.getElementById('reelModalMediaBox');
   if (mediaBox) {
-    mediaBox.innerHTML = `
-      <div class="reel-iframe-wrapper">
-        <iframe 
-          src="https://www.instagram.com/reel/${item.shortcode}/embed/" 
-          class="reel-instagram-iframe"
-          frameborder="0" 
-          scrolling="no" 
-          allowtransparency="true" 
-          allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share">
-        </iframe>
-      </div>
-    `;
+    const code = item.shortcode || item.shortCode;
+    const directVideoUrl = item.videoUrl;
+    const posterImg = item.poster || item.fallbackPoster || '';
+
+    if (code) {
+      mediaBox.innerHTML = `
+        <div style="position:relative; width:100%; display:flex; flex-direction:column; align-items:center; background:#000; border-radius:14px; overflow:hidden;">
+          <video 
+            src="/api/video-stream?code=${code}" 
+            controls 
+            autoplay 
+            playsinline 
+            loop 
+            poster="${posterImg}"
+            style="width:100%; max-height:70vh; object-fit:contain; background:#000;"
+            onerror="this.onerror=null; this.parentElement.innerHTML = \`
+              <iframe 
+                src='https://www.instagram.com/reel/${code}/embed/' 
+                style='width:100%; height:540px; border:none; background:#fff;' 
+                frameborder='0' 
+                scrolling='no' 
+                allowtransparency='true' 
+                allow='autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share'>
+              </iframe>
+              <div style='padding:0.75rem 1rem; width:100%; background:#18181b; display:flex; align-items:center; justify-content:center; box-sizing:border-box;'>
+                <a href='https://www.instagram.com/reel/${code}/' target='_blank' rel='noopener' style='display:inline-flex; align-items:center; justify-content:center; gap:8px; width:100%; padding:0.75rem 1.2rem; background:linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%); color:#fff; font-weight:700; font-size:0.9rem; text-decoration:none; border-radius:9999px; box-shadow:0 4px 14px rgba(225,48,108,0.4); text-align:center;'>
+                  <span>▶ Ver Reel en Instagram (@datitosdelajose)</span>
+                </a>
+              </div>
+            \`;"
+          >
+          </video>
+          <div style="padding:0.55rem 0.85rem; width:100%; background:#18181b; display:flex; align-items:center; justify-content:space-between; box-sizing:border-box; gap:8px;">
+            <span style="color:#a1a1aa; font-size:0.8rem; font-weight:600; display:inline-flex; align-items:center; gap:6px;">
+              <span style="display:inline-block; width:8px; height:8px; border-radius:50%; background:#22c55e;"></span> Reproduciendo video
+            </span>
+            <a href="https://www.instagram.com/reel/${code}/" target="_blank" rel="noopener" style="display:inline-flex; align-items:center; gap:6px; padding:0.4rem 0.85rem; background:linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%); color:#fff; font-weight:700; font-size:0.78rem; text-decoration:none; border-radius:9999px;">
+              <span>Abrir en Instagram ↗</span>
+            </a>
+          </div>
+        </div>
+      `;
+    } else if (directVideoUrl) {
+      mediaBox.innerHTML = `
+        <div class="reel-iframe-wrapper">
+          <video 
+            src="${directVideoUrl}" 
+            controls 
+            autoplay 
+            playsinline 
+            loop 
+            poster="${posterImg}"
+            style="width: 100%; height: 100%; max-height: 80vh; object-fit: contain; background: #000; border-radius: 8px;">
+          </video>
+        </div>
+      `;
+    } else {
+      mediaBox.innerHTML = `
+        <div class="reel-iframe-wrapper" style="display:flex; align-items:center; justify-content:center; background:#000;">
+          <img src="${posterImg}" style="width:100%; max-height:80vh; object-fit:contain; border-radius:8px;">
+        </div>
+      `;
+    }
   }
 
   modal.classList.add('active');

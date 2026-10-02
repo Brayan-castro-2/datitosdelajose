@@ -89,6 +89,7 @@ class RouteManager {
     this.updateBadges();
     this.updateCardButtons();
     this.renderDrawerContent();
+    if (typeof window.updateRouteOnMap === 'function') window.updateRouteOnMap();
   }
 
   // Obtener tablero activo
@@ -124,7 +125,7 @@ class RouteManager {
     this.state.boards.push(newBoard);
     this.state.activeBoardId = newBoard.id;
     this.saveState();
-    this.showToast(`✨ Nueva lista creada: "${cleanName}"`);
+    this.showToast(`Nueva lista creada: "${cleanName}"`);
     return newBoard;
   }
 
@@ -185,7 +186,7 @@ class RouteManager {
     } else {
       board.stops.push(place);
       this.saveState();
-      this.showToast(`📌 Agregado a "${board.name}": ${place.name}`);
+      this.showToast(`Agregado a "${board.name}": ${place.name}`);
       this.triggerPinAnimation(place.id);
       return true;
     }
@@ -222,6 +223,50 @@ class RouteManager {
     this.saveState();
   }
 
+    // Cargar una de las 10 rutas recomendadas oficiales de María José
+  loadCuratedRoute(routeId) {
+    if (typeof CURATED_ROUTES === 'undefined' || !Array.isArray(CURATED_ROUTES)) {
+      this.showToast('⚠️ No se encontraron rutas disponibles');
+      return;
+    }
+    const route = CURATED_ROUTES.find(r => r.id === routeId);
+    if (!route) return;
+
+    const boardId = 'curated_' + route.id.toLowerCase().replace(/[^a-z0-9]/g, '_');
+    
+    // Resolver todas las paradas de la ruta
+    const stops = [];
+    route.poiIds.forEach(id => {
+      const p = this.resolvePlace(id);
+      if (p) {
+        stops.push(p);
+      }
+    });
+
+    let existingBoard = this.state.boards.find(b => b.id === boardId);
+    if (!existingBoard) {
+      existingBoard = {
+        id: boardId,
+        name: route.title,
+        tripDate: this.getDefaultTripDate(),
+        tripTime: '10:00',
+        createdAt: new Date().toISOString(),
+        stops: stops,
+        curatedNote: route.tip,
+        durationNote: route.duration,
+        zoneNote: route.zone,
+        linkReel: route.linkReel
+      };
+      this.state.boards.push(existingBoard);
+    } else {
+      existingBoard.stops = stops;
+    }
+
+    this.state.activeBoardId = boardId;
+    this.saveState();
+    this.showToast(`Ruta cargada: ${route.title} (${stops.length} paradas)`);
+  }
+
   isInRoute(placeId) {
     const board = this.getActiveBoard();
     return board ? board.stops.some(p => p.id === placeId) : false;
@@ -232,6 +277,14 @@ class RouteManager {
     if (typeof getPlaceById === 'function') {
       const p = getPlaceById(placeId);
       if (p) return p;
+    }
+    if (typeof PLACES_DATA !== 'undefined' && Array.isArray(PLACES_DATA)) {
+      const p = PLACES_DATA.find(x => String(x.id).toLowerCase() === String(placeId).toLowerCase());
+      if (p) return p;
+    }
+    if (typeof PROMOS_DATA !== 'undefined' && Array.isArray(PROMOS_DATA)) {
+      const pr = PROMOS_DATA.find(x => String(x.id).toLowerCase() === String(placeId).toLowerCase());
+      if (pr) return pr;
     }
 
     if (typeof REELS_DATA !== 'undefined') {
@@ -355,13 +408,15 @@ class RouteManager {
     document.body.appendChild(link);
     link.click();
     document.body.removeChild(link);
-    this.showToast('📥 Calendario .ics descargado con éxito');
+    this.showToast('Itinerario descargado (.ics)');
   }
 
   // Generar ruta de Google Maps
   generateGoogleMapsUrl(board = this.getActiveBoard()) {
     if (!board || board.stops.length === 0) return '#';
-    const coordsPath = board.stops
+    const valid = board.stops.filter(p => p && p.coordinates && p.coordinates.lat && p.coordinates.lng);
+    if (valid.length === 0) return '#';
+    const coordsPath = valid
       .map(p => `${p.coordinates.lat},${p.coordinates.lng}`)
       .join('/');
     return `https://www.google.com/maps/dir/${coordsPath}`;
@@ -369,8 +424,11 @@ class RouteManager {
 
   getUberUrlForPlace(place) {
     if (!place) return '#';
-    const dropoffAddress = encodeURIComponent(`${place.name}, ${place.address}`);
-    return `https://m.uber.com/ul/?action=setPickup&pickup=my_location&dropoff[latitude]=${place.coordinates.lat}&dropoff[longitude]=${place.coordinates.lng}&dropoff[formatted_address]=${dropoffAddress}`;
+    const dropoffAddress = encodeURIComponent(`${place.name}, ${place.address || 'Puerto Varas'}`);
+    if (place.coordinates && place.coordinates.lat && place.coordinates.lng) {
+      return `https://m.uber.com/ul/?action=setPickup&pickup=my_location&dropoff[latitude]=${place.coordinates.lat}&dropoff[longitude]=${place.coordinates.lng}&dropoff[formatted_address]=${dropoffAddress}`;
+    }
+    return `https://m.uber.com/ul/?action=setPickup&pickup=my_location&dropoff[formatted_address]=${dropoffAddress}`;
   }
 
   getUberUrlForFirstStop(board = this.getActiveBoard()) {
@@ -398,7 +456,7 @@ class RouteManager {
     const toast = document.createElement('div');
     toast.className = `toast toast-${type}`;
     toast.innerHTML = `
-      <div class="toast-icon">${type === 'success' ? '✨' : 'ℹ️'}</div>
+      <div class="toast-icon" style="display:flex;align-items:center;">${type === 'success' ? '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#10b981" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0;"><polyline points="20 6 9 17 4 12"></polyline></svg>' : '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#60a5fa" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0;"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="16" x2="12" y2="12"></line><line x1="12" y1="8" x2="12.01" y2="8"></line></svg>'}</div>
       <div class="toast-text">${message}</div>
     `;
 
@@ -452,7 +510,7 @@ class RouteManager {
             <line x1="12" y1="5" x2="12" y2="19"></line>
             <line x1="5" y1="12" x2="19" y2="12"></line>
           </svg>
-          <span>${isReel ? '+ Agregar a ruta' : '+ Agregar a mi ruta'}</span>
+          <span>${isReel ? 'Agregar a ruta' : 'Agregar a mi ruta'}</span>
         `;
       }
     });
@@ -504,6 +562,31 @@ class RouteManager {
     if (boardSelectorWrap) {
       const daysCountdown = this.getDaysUntilTrip(activeBoard.tripDate);
       boardSelectorWrap.innerHTML = `
+        <div class="curated-routes-accordion" style="margin-bottom: 1rem; border-radius: 12px; background: #FFF5F5; border: 1px solid #FFE3E3; padding: 0.85rem;">
+          <div style="display:flex; align-items:center; justify-content:space-between; cursor:pointer;" onclick="const el=document.getElementById('curated-routes-list-body'); if(el) el.style.display = el.style.display==='none'?'block':'none';">
+            <span style="font-size:0.85rem; font-weight:800; color:#E60023;">10 Rutas Sugeridas por Jose</span>
+            <span style="font-size:0.75rem; color:#888;">Ver / Ocultar ▼</span>
+          </div>
+          <div id="curated-routes-list-body" style="margin-top:0.75rem; display:none;">
+            ${(typeof CURATED_ROUTES !== 'undefined' && Array.isArray(CURATED_ROUTES)) ? CURATED_ROUTES.map(r => `
+              <div style="background:white; border-radius:8px; padding:0.6rem 0.75rem; margin-bottom:0.5rem; border:1px solid #eee; display:flex; flex-direction:column; gap:4px;">
+                <div style="font-size:0.82rem; font-weight:700; color:#222;">${r.title}</div>
+                <div style="font-size:0.72rem; color:#666;">⏱️ ${r.duration} · 📍 ${r.zone}</div>
+                <div style="font-size:0.72rem; color:#b45309; font-style:italic;">"${r.tip}"</div>
+                <div style="display:flex; gap:6px; margin-top:4px;">
+                  <button type="button" style="flex:1; padding:4px 8px; font-size:0.72rem; font-weight:700; background:#E60023; color:white; border:none; border-radius:6px; cursor:pointer;" onclick="window.routeManager.loadCuratedRoute('${r.id}')">
+                    Cargar Ruta (${r.poiIds.length} paradas)
+                  </button>
+                  ${r.linkReel ? `
+                    <a href="${r.linkReel}" target="_blank" rel="noopener" style="padding:4px 8px; font-size:0.72rem; background:#f3f4f6; color:#333; text-decoration:none; border-radius:6px; display:flex; align-items:center;">
+                      Reel
+                    </a>
+                  ` : ''}
+                </div>
+              </div>
+            `).join('') : '<p style="font-size:0.75rem; color:#888;">Cargando rutas...</p>'}
+          </div>
+        </div>
         <div class="board-selector-bar">
           <div class="board-select-box">
             <label class="board-select-label">📂 Tu Lista Activa:</label>
@@ -753,4 +836,18 @@ class RouteManager {
 // Inicializar globalmente
 document.addEventListener('DOMContentLoaded', () => {
   window.routeManager = new RouteManager();
+});
+
+// Auto-highlight active navigation link
+document.addEventListener('DOMContentLoaded', () => {
+  const currentPath = window.location.pathname.split('/').pop() || 'index.html';
+  document.querySelectorAll('.nav-link-pill').forEach(link => {
+    const href = link.getAttribute('href');
+    if (href) {
+      const cleanHref = href.split('#')[0]; // Ignore hash
+      if (cleanHref === currentPath) {
+        link.classList.add('active');
+      }
+    }
+  });
 });
