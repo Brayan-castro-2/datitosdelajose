@@ -5650,10 +5650,22 @@ button, input, textarea, select {
 }
 
 @media (max-width: 860px) {
-  .layout-map .map-sticky-wrapper {
-    height: calc(100vh - 145px) !important;
+  body.mobile-map-active .hero-section {
+    display: none !important;
+  }
+  body.mobile-map-active .filter-section {
+    padding-top: 0.5rem !important;
+    padding-bottom: 0.5rem !important;
+  }
+  body.mobile-map-active .main-content-layout {
+    margin-top: 0 !important;
+    padding-top: 0 !important;
+  }
+  .layout-map .map-sticky-wrapper,
+  body.mobile-map-active .map-sticky-wrapper {
+    height: calc(100vh - 120px) !important;
     min-height: 480px !important;
-    margin-top: 0.5rem;
+    margin-top: 0.25rem !important;
     order: 1;
     position: relative !important;
   }

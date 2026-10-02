@@ -1,15 +1,39 @@
 // app.js - Lógica interactiva principal para Datitos de la Jose · Puerto Varas
 // Controla el carrusel Hero, el mapa Leaflet, filtros por clima/mood, buscador y renderizado de tarjetas.
 
+// Cola de navegación previa a inicialización completa
+window.pendingMobileNav = null;
+window.setMobileNav = function(mode, isInitial) {
+  window.pendingMobileNav = { mode, isInitial };
+};
+
 document.addEventListener('DOMContentLoaded', () => {
   initHeroCarousel();
   initPlacesApp();
-  // Manejo de navegación por hash (ej: desde otras pestañas)
-  if (window.location.hash === '#mapa-section' || window.location.hash === '#mapa') {
-    setTimeout(() => { if (typeof setMobileNav === 'function') setMobileNav('map'); }, 200);
-  } else if (window.location.hash === '#explorar') {
-    setTimeout(() => { if (typeof setMobileNav === 'function') setMobileNav('feed'); }, 200);
+
+  function checkHashOrUrlNav() {
+    const hash = (window.location.hash || '').toLowerCase();
+    const urlParams = new URLSearchParams(window.location.search);
+    const viewParam = (urlParams.get('view') || urlParams.get('tab') || '').toLowerCase();
+
+    if (hash.includes('map') || viewParam === 'map') {
+      if (typeof window.setMobileNav === 'function') {
+        window.setMobileNav('map', true);
+      }
+      setTimeout(() => {
+        if (typeof window.setMobileNav === 'function') {
+          window.setMobileNav('map', true);
+        }
+      }, 100);
+    } else if (hash.includes('explorar') || hash.includes('feed') || viewParam === 'feed' || viewParam === 'explorar') {
+      if (typeof window.setMobileNav === 'function') {
+        window.setMobileNav('feed', true);
+      }
+    }
   }
+
+  checkHashOrUrlNav();
+  window.addEventListener('hashchange', checkHashOrUrlNav);
 });
 
 /* ==========================================================================
@@ -931,8 +955,63 @@ function initPlacesApp() {
     }
   };
 
+  // Control de navegación móvil estilo Spotify (con un solo pulgar)
+  function setMobileNav(mode, isInitial = false) {
+    document.querySelectorAll('.s-nav-item').forEach(btn => btn.classList.remove('active'));
+    const targetBtn = document.getElementById(`s-nav-${mode}`);
+    if (targetBtn) targetBtn.classList.add('active');
+
+    if (mode === 'feed') {
+      document.body.classList.remove('mobile-map-active');
+      setLayout(window.innerWidth <= 900 ? 'feed' : 'split');
+      const exploreSec = document.getElementById('cards-grid-container') || document.getElementById('explorar');
+      if (exploreSec && !isInitial) {
+        exploreSec.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+    } else if (mode === 'map') {
+      document.body.classList.add('mobile-map-active');
+      setLayout(window.innerWidth <= 900 ? 'map' : 'split');
+      const mapEl = document.getElementById('map-sticky-wrapper') || document.getElementById('mapa-section') || document.getElementById('leaflet-map');
+      if (mapEl) {
+        mapEl.style.display = 'flex';
+        if (window.innerWidth <= 900) {
+          window.scrollTo({ top: 0, behavior: isInitial ? 'auto' : 'smooth' });
+        } else {
+          const scrollBehavior = isInitial ? 'auto' : 'smooth';
+          setTimeout(() => {
+            mapEl.scrollIntoView({ behavior: scrollBehavior, block: 'start' });
+          }, isInitial ? 40 : 120);
+        }
+      }
+      if (mapInstance) {
+        setTimeout(() => {
+          mapInstance.invalidateSize();
+          fitMapToMarkers();
+        }, 150);
+      }
+    } else if (mode === 'route') {
+      if (window.routeManager && typeof window.routeManager.openDrawer === 'function') {
+        window.routeManager.openDrawer();
+      } else {
+        const btnHeaderRoute = document.getElementById('btn-header-route');
+        if (btnHeaderRoute) btnHeaderRoute.click();
+      }
+    }
+  }
+
+  window.setMobileNav = setMobileNav;
+  window.setLayout = setLayout;
+  window.fitMapToMarkers = fitMapToMarkers;
+  window.getMapInstance = () => mapInstance;
+
   initLeafletMap();
   renderCards();
+
+  if (window.pendingMobileNav) {
+    const { mode, isInitial } = window.pendingMobileNav;
+    window.pendingMobileNav = null;
+    setMobileNav(mode, isInitial);
+  }
 }
 
 /* ==========================================================================
@@ -1253,43 +1332,6 @@ window.handleCardClick = handleCardClick;
 
 
 
-  // Control de navegación móvil estilo Spotify (con un solo pulgar)
-  function setMobileNav(mode) {
-    document.querySelectorAll('.s-nav-item').forEach(btn => btn.classList.remove('active'));
-    const targetBtn = document.getElementById(`s-nav-${mode}`);
-    if (targetBtn) targetBtn.classList.add('active');
-
-    const layout = document.getElementById('main-content-layout');
-
-    if (mode === 'feed') {
-      setLayout('split');
-      const exploreSec = document.getElementById('cards-grid-container') || document.getElementById('explorar');
-      if (exploreSec) {
-        exploreSec.scrollIntoView({ behavior: 'smooth', block: 'start' });
-      }
-    } else if (mode === 'map') {
-      setLayout('map');
-      const mapEl = document.getElementById('map-sticky-wrapper') || document.getElementById('mapa-section') || document.getElementById('leaflet-map');
-      if (mapEl) {
-        mapEl.style.display = 'flex';
-        mapEl.scrollIntoView({ behavior: 'smooth', block: 'start' });
-      }
-      if (mapInstance) {
-        setTimeout(() => {
-          mapInstance.invalidateSize();
-          fitMapToMarkers();
-        }, 200);
-      }
-    } else if (mode === 'route') {
-      if (window.routeManager && typeof window.routeManager.openDrawer === 'function') {
-        window.routeManager.openDrawer();
-      } else {
-        const btnHeaderRoute = document.getElementById('btn-header-route');
-        if (btnHeaderRoute) btnHeaderRoute.click();
-      }
-    }
-  }
-
   // Menú Lateral Chic
   function toggleSideMenu() {
     const drawer = document.getElementById('side-menu-drawer');
@@ -1321,7 +1363,6 @@ window.handleCardClick = handleCardClick;
     }
   }
 
-  window.setMobileNav = setMobileNav;
   window.updateMobileRouteBadge = updateMobileRouteBadge;
 
   // Interceptar la actualización del badge en routeManager si está disponible
