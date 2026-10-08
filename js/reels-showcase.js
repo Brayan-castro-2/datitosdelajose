@@ -46,7 +46,7 @@ function renderReelsGallery(activeFilter = 'all', showAll = false) {
   // Filtrado
   const filtered = REELS_DATA.filter(item => {
     if (activeFilter === 'all') return true;
-    return item.categoria === activeFilter;
+    return item.categoria === activeFilter || item.filter === activeFilter;
   });
 
   if (countBadge) {
@@ -100,7 +100,7 @@ function renderReelsGallery(activeFilter = 'all', showAll = false) {
       <div class="reel-info-bar">
         <div class="reel-brand-header">
           <div class="reel-avatar-wrap">
-            <img src="thumbs/maria_jose_post.jpg" alt="María José" class="reel-avatar-img" onerror="this.src='thumbs/thumb_${item.shortcode}.jpg'">
+            <img src="thumbs/logo_insta.jpg" alt="Datitos de la Jose" class="reel-avatar-img" onerror="this.src='thumbs/thumb_${item.shortcode}.jpg'">
           </div>
           <div class="reel-brand-names">
             <h3 class="reel-brand-title">${item.lugar}</h3>

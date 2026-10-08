@@ -661,7 +661,7 @@ class RouteManager {
                 </a>
               ` : ''}
               ${place.whatsapp ? `
-                <a href="https://wa.me/${place.whatsapp.replace(/[^0-9]/g, '')}?text=Hola!%20Tengo%20guardado%20${encodeURIComponent(place.name)}%20en%20mi%20ruta%20de%20Mamá%20Santi%20y%20quiero%20hacer%20una%20consulta." target="_blank" rel="noopener" class="stop-wa-btn" title="Consultar por WhatsApp">
+                <a href="https://wa.me/${place.whatsapp.replace(/[^0-9]/g, '')}?text=Hola!%20Tengo%20guardado%20${encodeURIComponent(place.name)}%20en%20mi%20ruta%20de%20Datitos%20de%20la%20Jose%20y%20quiero%20hacer%20una%20consulta." target="_blank" rel="noopener" class="stop-wa-btn" title="Consultar por WhatsApp">
                   💬 WhatsApp
                 </a>
               ` : ''}
