@@ -594,39 +594,35 @@ function initPlacesApp() {
                 `}
               </button>
 
-              ${(hasLeafletMap && hasCoords) ? `
-                <button type="button" class="btn-card-map-action is-map-view" onclick="event.stopPropagation(); window.focusPlace('${place.id}');" title="Ver en el mapa interactivo">
-                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                    <polygon points="1 6 1 22 8 18 16 22 23 18 23 2 16 6 8 2 1 6"></polygon>
-                    <line x1="8" y1="2" x2="8" y2="18"></line>
-                    <line x1="16" y1="6" x2="16" y2="22"></line>
+              <div class="card-actions-secondary-row">
+                ${(hasLeafletMap && hasCoords) ? `
+                  <button type="button" class="btn-card-map-action is-map-view" onclick="event.stopPropagation(); window.focusPlace('${place.id}');" title="Ver en el mapa interactivo">
+                    <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                      <polygon points="1 6 1 22 8 18 16 22 23 18 23 2 16 6 8 2 1 6"></polygon>
+                      <line x1="8" y1="2" x2="8" y2="18"></line>
+                      <line x1="16" y1="6" x2="16" y2="22"></line>
+                    </svg>
+                    <span>Ver en mapa</span>
+                  </button>
+                ` : ''}
+
+                <a href="${gmapsUrl}" target="_blank" rel="noopener" class="btn-card-map-action is-gmaps" onclick="event.stopPropagation();" title="Abrir ubicación en Google Maps">
+                  <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/>
                   </svg>
-                  <span>Ver en el mapa</span>
-                </button>
-              ` : ''}
+                  <span>Google Maps</span>
+                </a>
 
-              <a href="${gmapsUrl}" target="_blank" rel="noopener" class="btn-card-map-action is-gmaps" onclick="event.stopPropagation();" title="Abrir ubicación en Google Maps">
-                <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor">
-                  <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/>
-                </svg>
-                <span>Ver en Google Maps</span>
-              </a>
-
-              ${isPromosPage ? `
-                <button type="button" class="btn-uber-mini btn-promo-video-action" onclick="event.stopPropagation(); window.openPostDetailModal('${place.id}')" style="background:linear-gradient(45deg, #f09433, #dc2743, #bc1888); color:#fff; font-weight:700; border:none; cursor:pointer;" title="Ver publicación oficial y video">
-                  Ver Video
-                </button>
-              ` : `
-                <a href="${uberUrl}" target="_blank" rel="noopener" class="btn-uber-mini" onclick="event.stopPropagation();" title="Pedir Uber directo a este lugar">
+                <a href="${uberUrl}" target="_blank" rel="noopener" class="btn-card-map-action is-uber" onclick="event.stopPropagation();" title="Pedir Uber directo a este lugar">
                   Uber
                 </a>
-              `}
 
-              ${place.airbnbUrl ? `
-                <a href="${place.airbnbUrl}" target="_blank" rel="noopener" class="btn-airbnb-mini" onclick="event.stopPropagation();" title="Ver en Airbnb / Reservar">
-                  Airbnb
-                </a>
-              ` : ''}
+                ${place.airbnbUrl ? `
+                  <a href="${place.airbnbUrl}" target="_blank" rel="noopener" class="btn-card-map-action is-airbnb" onclick="event.stopPropagation();" title="Ver en Airbnb / Reservar">
+                    Airbnb
+                  </a>
+                ` : ''}
+              </div>
             </div>
           </div>
         </article>
