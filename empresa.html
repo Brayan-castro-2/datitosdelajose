@@ -12,7 +12,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@400;500;600;700&family=Domine:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 
   <!-- Estilos Custom -->
-  <link rel="stylesheet" href="css/style.css?v=v17_reels_and_pin_fix">
+  <link rel="stylesheet" href="css/style.css?v=v18_side_menu_avatar_fix">
 </head>
 <body>
 
@@ -475,14 +475,14 @@
   
   <aside class="side-menu-drawer" id="side-menu-drawer" aria-label="Menú principal de navegación">
     <div class="side-menu-header">
-      <div class="side-menu-profile">
-        <img src="thumbs/logo_insta.jpg" alt="María José" class="side-avatar">
+      <div class="side-menu-brand">
+        <img src="thumbs/logo_insta.jpg" alt="María José" class="side-menu-avatar">
         <div>
-          <div class="side-name">Datitos de la Jose</div>
-          <div class="side-handle">@datitosdelajose</div>
+          <h3 class="side-menu-name">Datitos de la Jose</h3>
+          <span class="side-menu-handle">@datitosdelajose · Puerto Varas</span>
         </div>
       </div>
-      <button class="side-close-btn" onclick="window.toggleSideMenu()" aria-label="Cerrar menú">
+      <button type="button" class="btn-close-side-menu" onclick="window.toggleSideMenu()" aria-label="Cerrar menú">
         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
       </button>
     </div>
