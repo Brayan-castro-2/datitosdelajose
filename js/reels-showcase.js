@@ -292,8 +292,8 @@ function openReelModal(id) {
           >
           </video>
           <div style="padding:0.55rem 0.85rem; width:100%; background:#18181b; display:flex; align-items:center; justify-content:space-between; box-sizing:border-box; gap:8px;">
-            <span style="color:#a1a1aa; font-size:0.8rem; font-weight:600; display:inline-flex; align-items:center; gap:6px;">
-              <span style="display:inline-block; width:8px; height:8px; border-radius:50%; background:#22c55e;"></span> Reproduciendo video
+            <span style="color:#a1a1aa; font-size:0.8rem; font-weight:600; display:inline-flex; align-items:center;">
+              Reproduciendo video
             </span>
             <a href="https://www.instagram.com/reel/${code}/" target="_blank" rel="noopener" style="display:inline-flex; align-items:center; gap:6px; padding:0.4rem 0.85rem; background:linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%); color:#fff; font-weight:700; font-size:0.78rem; text-decoration:none; border-radius:9999px;">
               <span>Abrir en Instagram ↗</span>

@@ -584,7 +584,7 @@ function initPlacesApp() {
           <div class="card-image-wrap" onclick="event.stopPropagation(); window.openPostDetailModal('${place.id}')" title="Ver publicación completa y video">
             <img class="card-img" src="${place.image}" alt="${place.name}" loading="lazy" onerror="this.onerror=null; this.src='${place.fallbackImage || 'https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=800&q=80'}';" />
             <div class="card-floating-badge">${place.categoryBadge}</div>
-            ${place.status ? `<div class="card-status-badge" style="position:absolute; top:12px; right:12px; z-index:4; background:${place.status === 'Activo' ? '#16a34a' : '#64748b'}; color:#fff; font-size:0.75rem; font-weight:800; padding:4px 9px; border-radius:9999px; box-shadow:0 2px 8px rgba(0,0,0,0.3);">${place.status === 'Activo' ? '🟢 Activo' : '⚪ Finalizado'}</div>` : `<div class="card-rating-badge">★ ${place.rating}</div>`}
+            ${place.status ? `<div class="card-status-badge" style="position:absolute; top:12px; right:12px; z-index:4; background:${place.status === 'Activo' ? '#16a34a' : '#64748b'}; color:#fff; font-size:0.75rem; font-weight:800; padding:4px 9px; border-radius:9999px; box-shadow:0 2px 8px rgba(0,0,0,0.3);">${place.status === 'Activo' ? 'Activo' : 'Finalizado'}</div>` : `<div class="card-rating-badge">★ ${place.rating}</div>`}
             <div class="curator-tag-overlay">${isPromosPage ? '🎁 Sorteo & Promo Oficial' : 'Dato de la Jose'}</div>
             ${(place.videoUrl || place.shortCode) ? `
               <div class="card-video-pill">
@@ -1264,8 +1264,8 @@ function openPostDetailModal(id) {
           >
           </video>
           <div style="padding:0.55rem 0.85rem; width:100%; background:#18181b; display:flex; align-items:center; justify-content:space-between; box-sizing:border-box; gap:8px;">
-            <span style="color:#a1a1aa; font-size:0.8rem; font-weight:600; display:inline-flex; align-items:center; gap:6px;">
-              <span style="display:inline-block; width:8px; height:8px; border-radius:50%; background:#22c55e;"></span> Video de Instagram
+            <span style="color:#a1a1aa; font-size:0.8rem; font-weight:600; display:inline-flex; align-items:center;">
+              Video de Instagram
             </span>
             <a href="https://www.instagram.com/reel/${code}/" target="_blank" rel="noopener" style="display:inline-flex; align-items:center; gap:6px; padding:0.4rem 0.85rem; background:linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%); color:#fff; font-weight:700; font-size:0.78rem; text-decoration:none; border-radius:9999px;">
               <span>Abrir en Instagram ↗</span>
