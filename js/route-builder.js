@@ -105,6 +105,9 @@ class RouteManager {
       this.state.activeBoardId = boardId;
       this.saveState();
       this.showToast(`Itinerario activo: "${this.getActiveBoard().name}"`, 'info');
+      if (typeof window.updateRouteOnMap === 'function') {
+        window.updateRouteOnMap(true);
+      }
     }
   }
 
@@ -265,6 +268,28 @@ class RouteManager {
     this.state.activeBoardId = boardId;
     this.saveState();
     this.showToast(`Ruta cargada: ${route.title} (${stops.length} paradas)`);
+
+    // Actualizar caminito rojo y enfocar mapa
+    if (typeof window.updateRouteOnMap === 'function') {
+      window.updateRouteOnMap(true);
+    }
+
+    // En móviles, cerrar el drawer y cambiar a vista Mapa para ver el recorrido
+    if (window.innerWidth <= 768) {
+      if (typeof window.setMobileNav === 'function') {
+        window.setMobileNav('map');
+      }
+      this.closeDrawer();
+      setTimeout(() => {
+        if (typeof window.fitMapToRoute === 'function') {
+          window.fitMapToRoute();
+        }
+      }, 400);
+    } else {
+      if (typeof window.fitMapToRoute === 'function') {
+        window.fitMapToRoute();
+      }
+    }
   }
 
   isInRoute(placeId) {
@@ -643,7 +668,7 @@ class RouteManager {
     if (boardSelectorWrap) {
       const daysCountdown = this.getDaysUntilTrip(activeBoard.tripDate);
       boardSelectorWrap.innerHTML = `
-        <div class="curated-routes-accordion" style="margin-bottom: 1rem; border-radius: 12px; background: #FFF5F5; border: 1px solid #FFE3E3; padding: 0.85rem;">
+        <div class="curated-routes-accordion" style="margin-bottom: 1rem; border-radius: 12px; background: #FFF5F5; border: 1px solid #FFE3E3; padding: 0.85rem; width: 100%; max-width: 100%; box-sizing: border-box; overflow: hidden;">
           <div style="display:flex; align-items:center; justify-content:space-between; cursor:pointer;" onclick="const el=document.getElementById('curated-routes-list-body'); if(el) el.style.display = el.style.display==='none'?'block':'none';">
             <span style="font-size:0.85rem; font-weight:800; color:#E60023;">10 Rutas Sugeridas por Jose</span>
             <span style="font-size:0.75rem; color:#888;">Ver / Ocultar ▼</span>
@@ -668,11 +693,11 @@ class RouteManager {
             `).join('') : '<p style="font-size:0.75rem; color:#888;">Cargando rutas...</p>'}
           </div>
         </div>
-        <div class="board-selector-bar">
-          <div class="board-select-box">
+        <div class="board-selector-bar" style="width: 100%; min-width: 0;">
+          <div class="board-select-box" style="width: 100%; min-width: 0;">
             <label class="board-select-label">📂 Tu Lista Activa:</label>
-            <div class="board-select-row">
-              <select id="select-active-board" class="select-active-board" onchange="window.routeManager.setActiveBoard(this.value)">
+            <div class="board-select-row" style="width: 100%; min-width: 0; display: flex; align-items: center; gap: 8px;">
+              <select id="select-active-board" class="select-active-board" style="min-width: 0; width: calc(100% - 46px); flex: 1 1 auto;" onchange="window.routeManager.setActiveBoard(this.value)">
                 ${this.state.boards.map(b => `
                   <option value="${b.id}" ${b.id === activeBoard.id ? 'selected' : ''}>
                     ${b.name} (${b.stops.length} ${b.stops.length === 1 ? 'parada' : 'paradas'})

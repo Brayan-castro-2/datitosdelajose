@@ -3378,18 +3378,26 @@ h1, h2, h3, h4, h5, h6,
   padding: 1rem 1.25rem;
   background: var(--color-canvas-alt);
   border-bottom: 1px solid var(--color-border);
+  width: 100%;
+  max-width: 100%;
+  box-sizing: border-box;
+  overflow-x: hidden;
 }
 
 .board-selector-bar {
   display: flex;
   flex-direction: column;
   gap: 0.85rem;
+  width: 100%;
+  min-width: 0;
 }
 
 .board-select-box {
   display: flex;
   flex-direction: column;
   gap: 4px;
+  width: 100%;
+  min-width: 0;
 }
 
 .board-select-label {
@@ -3404,22 +3412,29 @@ h1, h2, h3, h4, h5, h6,
   display: flex;
   align-items: center;
   gap: 8px;
+  width: 100%;
+  min-width: 0;
 }
 
 .select-active-board {
-  flex-grow: 1;
+  flex: 1 1 auto;
+  min-width: 0;
+  width: calc(100% - 46px);
   padding: 0.6rem 0.9rem;
   background: var(--color-surface);
   border: 1.5px solid var(--color-border);
   border-radius: 12px;
-  font-family: var(--font-display);
-  font-size: 0.92rem;
-  font-weight: 800;
+  font-family: var(--font-display, var(--font-brand, sans-serif));
+  font-size: 0.88rem;
+  font-weight: 700;
   color: var(--color-text-primary);
   cursor: pointer;
   outline: none;
   box-shadow: var(--shadow-subtle);
   transition: border-color var(--transition-fast);
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
 }
 
 .select-active-board:focus {
@@ -5633,14 +5648,34 @@ h1, h2, h3, h4, h5, h6,
     margin-top: 0.2rem !important;
   }
 
-  /* Drawer de Ruta: termina ARRIBA de la barra de Spotify */
+  /* Drawer de Ruta: termina ARRIBA de la barra de Spotify y 100% ancho móvil */
   .route-drawer {
+    left: 0 !important;
+    right: 0 !important;
+    width: 100% !important;
+    max-width: 100% !important;
     top: 0 !important;
     bottom: calc(64px + env(safe-area-inset-bottom, 0px)) !important;
     height: auto !important;
     max-height: calc(100vh - 64px - env(safe-area-inset-bottom, 0px)) !important;
     box-shadow: 0 -8px 30px rgba(0, 0, 0, 0.3) !important;
     border-radius: 0 0 20px 20px !important;
+    overflow-x: hidden !important;
+  }
+
+  .drawer-body {
+    padding: 1.25rem 1rem !important;
+    overflow-x: hidden !important;
+    width: 100% !important;
+    box-sizing: border-box !important;
+  }
+
+  .drawer-boards-selector-wrap {
+    padding: 0.85rem 0 !important;
+    background: transparent !important;
+    border-bottom: none !important;
+    width: 100% !important;
+    box-sizing: border-box !important;
   }
 
   .drawer-footer {
