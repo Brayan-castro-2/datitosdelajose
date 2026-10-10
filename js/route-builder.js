@@ -422,6 +422,74 @@ class RouteManager {
     return `https://www.google.com/maps/dir/${coordsPath}`;
   }
 
+  generateWhatsAppShareUrl(board = this.getActiveBoard()) {
+    if (!board || board.stops.length === 0) return '#';
+    const valid = board.stops.filter(p => p && p.coordinates && p.coordinates.lat && p.coordinates.lng);
+    const coordsPath = valid.map(p => `${p.coordinates.lat},${p.coordinates.lng}`).join('/');
+    const mapsLink = valid.length > 0 ? `https://www.google.com/maps/dir/${coordsPath}` : '';
+
+    const lines = [
+      `🚗 *Itinerario en Puerto Varas con Datitos de la Jose*`,
+      `📅 Fecha: ${board.tripDate || 'Próximo viaje'}`,
+      `⭐ Lista: "${board.name}"`,
+      ``,
+      ...board.stops.map((stop, i) => `${i + 1}. *${stop.name}* (${stop.address || stop.category || 'Puerto Varas'})`),
+      ``,
+      mapsLink ? `📍 Ver ruta en Google Maps:\n${mapsLink}` : ''
+    ];
+    return `https://wa.me/?text=${encodeURIComponent(lines.filter(Boolean).join('\n'))}`;
+  }
+
+  calculateRouteStats(board = this.getActiveBoard()) {
+    if (!board || board.stops.length < 2) return { km: 0, timeMin: 0 };
+    let totalKm = 0;
+    for (let i = 0; i < board.stops.length - 1; i++) {
+      const p1 = board.stops[i].coordinates;
+      const p2 = board.stops[i + 1].coordinates;
+      if (p1 && p2 && p1.lat && p2.lat) {
+        const R = 6371;
+        const dLat = (p2.lat - p1.lat) * Math.PI / 180;
+        const dLon = (p2.lng - p1.lng) * Math.PI / 180;
+        const a = Math.sin(dLat / 2) * Math.sin(dLat / 2) +
+          Math.cos(p1.lat * Math.PI / 180) * Math.cos(p2.lat * Math.PI / 180) *
+          Math.sin(dLon / 2) * Math.sin(dLon / 2);
+        const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+        totalKm += R * c;
+      }
+    }
+    const roadKm = Math.round(totalKm * 1.35);
+    const drivingMinutes = Math.round((roadKm / 42) * 60);
+    return { km: roadKm, timeMin: drivingMinutes };
+  }
+
+  optimizeRouteStops() {
+    const activeBoard = this.getActiveBoard();
+    if (!activeBoard || activeBoard.stops.length < 3) {
+      this.showToast('Agrega al menos 3 paradas para optimizar el camino', 'info');
+      return;
+    }
+    const unvisited = [...activeBoard.stops];
+    const optimized = [unvisited.shift()];
+    while (unvisited.length > 0) {
+      const current = optimized[optimized.length - 1];
+      let nearestIdx = 0;
+      let minDistance = Infinity;
+      unvisited.forEach((cand, idx) => {
+        if (current.coordinates && cand.coordinates) {
+          const d = Math.hypot(cand.coordinates.lat - current.coordinates.lat, cand.coordinates.lng - current.coordinates.lng);
+          if (d < minDistance) {
+            minDistance = d;
+            nearestIdx = idx;
+          }
+        }
+      });
+      optimized.push(unvisited.splice(nearestIdx, 1)[0]);
+    }
+    activeBoard.stops = optimized;
+    this.saveState();
+    this.showToast('¡Paradas reordenadas en la ruta más rápida! 🚗✨', 'success');
+  }
+
   getUberUrlForPlace(place) {
     if (!place) return '#';
     const dropoffAddress = encodeURIComponent(`${place.name}, ${place.address || 'Puerto Varas'}`);
@@ -541,11 +609,24 @@ class RouteManager {
     const activeBoard = this.getActiveBoard();
     const container = document.getElementById('route-stops-list');
     const emptyState = document.getElementById('route-empty-state');
-    const footerActions = document.getElementById('route-drawer-footer');
     const countSpan = document.getElementById('drawer-stops-count');
     const timeSpan = document.getElementById('drawer-est-time');
 
     if (!container || !activeBoard) return;
+
+    const stats = this.calculateRouteStats(activeBoard);
+    if (countSpan) {
+      countSpan.textContent = `${activeBoard.stops.length} ${activeBoard.stops.length === 1 ? 'parada' : 'paradas'}`;
+    }
+    if (timeSpan) {
+      if (activeBoard.stops.length >= 2 && stats.km > 0) {
+        const h = Math.floor(stats.timeMin / 60);
+        const m = stats.timeMin % 60;
+        timeSpan.textContent = `~${stats.km} km · ${h > 0 ? h + 'h ' : ''}${m}m en auto`;
+      } else {
+        timeSpan.textContent = `${activeBoard.stops.length * 1.5} hrs est.`;
+      }
+    }
 
     // Selector de Tableros / Listas
     let boardSelectorWrap = document.getElementById('drawer-boards-selector-wrap');
@@ -677,22 +758,37 @@ class RouteManager {
     }).join('');
 
     // Actualizar botones de acción del footer
+    const footerActions = document.getElementById('route-drawer-footer');
     if (footerActions) {
       const gcalUrl = this.generateGoogleCalendarUrl(activeBoard);
       const gmapsUrl = this.generateGoogleMapsUrl(activeBoard);
+      const waShareUrl = this.generateWhatsAppShareUrl(activeBoard);
       const uberFirstUrl = this.getUberUrlForFirstStop(activeBoard);
 
       footerActions.innerHTML = `
+        <a href="${waShareUrl}" target="_blank" rel="noopener" class="btn-wa-share-route" title="Compartir itinerario por WhatsApp con amigos o familia" style="background:#25D366; color:#fff; display:flex; align-items:center; justify-content:center; gap:8px; padding:0.75rem 1rem; border-radius:var(--radius-pill, 8px); font-weight:700; text-decoration:none; margin-bottom:0.5rem; box-shadow:0 2px 8px rgba(37,211,102,0.3); font-size:0.9rem;">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M12.031 6.172c-3.181 0-5.767 2.586-5.768 5.766-.001 1.298.38 2.27 1.019 3.287l-.582 2.128 2.182-.573c.978.58 1.911.928 3.145.929 3.178 0 5.767-2.587 5.768-5.766.001-3.187-2.575-5.771-5.764-5.771zm3.392 8.244c-.144.405-.837.774-1.17.824-.299.045-.677.063-1.092-.069-.252-.08-.575-.187-.988-.365-1.739-.751-2.874-2.502-2.961-2.617-.087-.116-.708-.94-.708-1.793s.448-1.273.607-1.446c.159-.173.346-.217.462-.217l.332.006c.106.005.249-.04.39.298.144.347.491 1.2.534 1.287.043.087.072.188.014.304-.058.116-.087.188-.173.289l-.26.304c-.087.086-.177.18-.076.354.101.174.449.741.964 1.201.662.591 1.221.774 1.394.86.173.086.275.071.376-.043.101-.116.433-.506.549-.68.116-.173.231-.145.39-.087s1.011.477 1.184.564c.173.087.289.129.332.202.043.073.043.419-.101.824z"/>
+          </svg>
+          <span>📲 Compartir Ruta por WhatsApp</span>
+        </a>
+
+        ${activeBoard.stops.length >= 3 ? `
+          <button type="button" class="btn-optimize-route" onclick="window.routeManager.optimizeRouteStops()" title="Reordenar las paradas por cercanía geográfica para no dar vueltas de más" style="background:var(--color-canvas-alt); color:var(--color-text-primary); border:1.5px solid var(--color-border); display:flex; align-items:center; justify-content:center; gap:8px; padding:0.65rem 1rem; border-radius:var(--radius-pill, 8px); font-weight:700; cursor:pointer; width:100%; margin-bottom:0.5rem; font-size:0.86rem;">
+            <span>🪄 Ordenar ruta más rápida (sin vueltas)</span>
+          </button>
+        ` : ''}
+
+        <a href="${gmapsUrl}" target="_blank" rel="noopener" class="btn-gmaps-full" title="Abrir ruta encadenada en Google Maps">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="1 6 1 22 8 18 16 22 23 18 23 2 16 6 8 2 1 6"></polygon><line x1="8" y1="2" x2="8" y2="18"></line><line x1="16" y1="6" x2="16" y2="22"></line></svg>
+          <span>Abrir ruta completa en Google Maps</span>
+        </a>
+
         <a href="${gcalUrl}" target="_blank" rel="noopener" class="btn-gcalendar-full" title="Agendar este viaje en Google Calendar">
           <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
             <path d="M19 4h-1V2h-2v2H8V2H6v2H5c-1.11 0-1.99.9-1.99 2L3 20c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 16H5V10h14v10zm0-12H5V6h14v2zm-7 5h5v5h-5v-5z"/>
           </svg>
           <span>Agendar Ruta en Google Calendar</span>
-        </a>
-
-        <a href="${gmapsUrl}" target="_blank" rel="noopener" class="btn-gmaps-full" title="Abrir ruta encadenada en Google Maps">
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="1 6 1 22 8 18 16 22 23 18 23 2 16 6 8 2 1 6"></polygon><line x1="8" y1="2" x2="8" y2="18"></line><line x1="16" y1="6" x2="16" y2="22"></line></svg>
-          <span>Abrir ruta completa en Google Maps</span>
         </a>
 
         <div class="drawer-secondary-actions-row">

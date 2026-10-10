@@ -366,6 +366,9 @@ function initPlacesApp() {
                   Airbnb
                 </a>
               ` : ''}
+              <button type="button" class="btn-uber-mini" onclick="event.stopPropagation(); window.highlightCard('${place.id}', true);" style="padding:0.4rem 0.65rem; background:#0f172a; color:#fff; border:none; cursor:pointer;" title="Desplazar lista hasta esta tarjeta">
+                📋 Ver en lista
+              </button>
             </div>
           </div>
         </div>
@@ -382,8 +385,23 @@ function initPlacesApp() {
       });
 
       marker.on('click', () => {
-        // Resaltar tarjeta correspondiente en el feed
-        highlightCard(place.id);
+        // Resaltar y hacer scroll hacia la tarjeta correspondiente en la lista de al lado
+        highlightCard(place.id, true);
+      });
+
+      marker.on('mouseover', () => {
+        if (window.innerWidth > 860) {
+          highlightCard(place.id, false);
+          const el = marker.getElement();
+          if (el) el.classList.add('marker-hover-bounce');
+        }
+      });
+
+      marker.on('mouseout', () => {
+        if (window.innerWidth > 860) {
+          const el = marker.getElement();
+          if (el) el.classList.remove('marker-hover-bounce');
+        }
       });
 
       marker.addTo(markersLayer);
@@ -451,16 +469,55 @@ function initPlacesApp() {
     }, 250);
   }
 
-  function highlightCard(placeId) {
-    const card = document.querySelector(`.pinterest-card[data-id="${placeId}"]`);
+  function highlightCard(placeId, shouldScroll = true) {
+    if (!placeId) return;
+
+    let card = document.querySelector(`.pinterest-card[data-id="${placeId}"]`);
+
+    // Si la tarjeta no está en el DOM actual (por paginación o filtro):
+    if (!card) {
+      const allPlaces = (typeof PLACES_DATA !== 'undefined' && Array.isArray(PLACES_DATA))
+        ? PLACES_DATA
+        : ((typeof PROMOS_DATA !== 'undefined' && Array.isArray(PROMOS_DATA)) ? PROMOS_DATA : []);
+      
+      const targetPlace = allPlaces.find(p => String(p.id) === String(placeId));
+      if (targetPlace) {
+        // Si hay un filtro de categoría activo que la oculta, restablecerlo a 'all'
+        if (currentCategory !== 'all' && targetPlace.category !== currentCategory) {
+          currentCategory = 'all';
+          document.querySelectorAll('.category-chip').forEach(chip => {
+            chip.classList.toggle('active', chip.dataset.category === 'all');
+          });
+        }
+
+        // Expandir visibleCount para garantizar que se renderice
+        const filtered = getFilteredPlaces();
+        const placeIdx = filtered.findIndex(p => String(p.id) === String(placeId));
+        if (placeIdx !== -1) {
+          visibleCount = Math.max(visibleCount, placeIdx + 15);
+          renderCards();
+          card = document.querySelector(`.pinterest-card[data-id="${placeId}"]`);
+        }
+      }
+    }
+
     if (card) {
-      card.scrollIntoView({ behavior: 'smooth', block: 'center' });
-      card.style.borderColor = 'var(--color-pin-red)';
-      card.style.boxShadow = '0 0 0 4px rgba(230, 0, 35, 0.25)';
-      setTimeout(() => {
-        card.style.borderColor = '';
-        card.style.boxShadow = '';
-      }, 2500);
+      if (shouldScroll) {
+        // En PC y móvil, desplazamiento suave centrado hacia la publicación
+        card.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      }
+
+      // Remover resaltes previos
+      document.querySelectorAll('.pinterest-card.is-highlighted-from-map').forEach(c => {
+        if (c !== card) c.classList.remove('is-highlighted-from-map');
+      });
+
+      card.classList.add('is-highlighted-from-map');
+
+      clearTimeout(card._highlightTimer);
+      card._highlightTimer = setTimeout(() => {
+        card.classList.remove('is-highlighted-from-map');
+      }, 3500);
     }
   }
 
@@ -671,6 +728,30 @@ function initPlacesApp() {
     if (window.routeManager) {
       window.routeManager.updateCardButtons();
     }
+
+    // Sincronización bidireccional en PC: pasar el mouse por una tarjeta resalta el pin en el mapa
+    if (!cardsContainer._hasMapSyncHover) {
+      cardsContainer._hasMapSyncHover = true;
+      cardsContainer.addEventListener('mouseover', (e) => {
+        if (window.innerWidth <= 860) return;
+        const card = e.target.closest('.pinterest-card');
+        if (!card) return;
+        const marker = markerMap.get(card.dataset.id);
+        if (marker && marker.getElement()) {
+          marker.getElement().classList.add('marker-hover-bounce');
+        }
+      });
+
+      cardsContainer.addEventListener('mouseout', (e) => {
+        if (window.innerWidth <= 860) return;
+        const card = e.target.closest('.pinterest-card');
+        if (!card) return;
+        const marker = markerMap.get(card.dataset.id);
+        if (marker && marker.getElement()) {
+          marker.getElement().classList.remove('marker-hover-bounce');
+        }
+      });
+    }
   }
 
   // Cambiar Disposición de Vista
@@ -737,9 +818,10 @@ function initPlacesApp() {
     });
   });
 
-  // Global helper para botón "Ubicar en mapa"
+  // Global helper para botón "Ubicar en mapa" y sincronización de tarjetas
   window.focusPlace = focusPlaceOnMap;
   window.focusPlaceOnMap = focusPlaceOnMap;
+  window.highlightCard = highlightCard;
   window.resetFilters = () => {
     currentCategory = 'all';
     searchQuery = '';

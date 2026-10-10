@@ -595,6 +595,44 @@ button, input, textarea, select {
   border-color: rgba(230, 0, 35, 0.2);
 }
 
+/* Sincronización Interactiva Mapa <-> Lista */
+@keyframes cardPulseGlow {
+  0% {
+    transform: translateY(0) scale(1);
+    box-shadow: 0 0 0 0 rgba(230, 0, 35, 0.6);
+  }
+  25% {
+    transform: translateY(-5px) scale(1.02);
+    box-shadow: 0 0 0 8px rgba(230, 0, 35, 0.28), 0 16px 32px rgba(230, 0, 35, 0.22);
+    border-color: #E60023 !important;
+  }
+  60% {
+    transform: translateY(-2px) scale(1.01);
+    box-shadow: 0 0 0 5px rgba(230, 0, 35, 0.16), 0 10px 24px rgba(0, 0, 0, 0.12);
+    border-color: #E60023 !important;
+  }
+  100% {
+    transform: translateY(0) scale(1);
+    box-shadow: var(--shadow-card);
+  }
+}
+
+.pinterest-card.is-highlighted-from-map {
+  border-color: #E60023 !important;
+  animation: cardPulseGlow 2.4s cubic-bezier(0.16, 1, 0.3, 1);
+  position: relative;
+  z-index: 10;
+  outline: 2px solid #E60023;
+  outline-offset: 2px;
+}
+
+.marker-hover-bounce {
+  transform: scale(1.35) translateY(-8px) !important;
+  transition: transform 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  z-index: 1000 !important;
+  filter: drop-shadow(0 6px 14px rgba(230, 0, 35, 0.6)) !important;
+}
+
 /* Contenedor de Imagen con Efecto Hover */
 .card-image-wrap {
   position: relative;
