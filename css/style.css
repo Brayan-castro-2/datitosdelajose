@@ -3,7 +3,7 @@
    Estética visual limpia, fotografía en alta definición, bordes 22px, glassmorphism
    ========================================================================== */
 
-@import url('https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400..800;1,9..40,400..800&family=Inter:wght@300;400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Comfortaa:wght@400;500;600;700&family=Domine:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap');
 
 :root {
   /* Paleta de Colores Inspirada en Pinterest y la Patagonia */
@@ -41,8 +41,10 @@
   --shadow-hover: 0 20px 40px -6px rgba(24, 30, 37, 0.12), 0 8px 16px rgba(0, 0, 0, 0.05);
   --shadow-floating: 0 24px 48px -12px rgba(0, 0, 0, 0.22);
   
-  /* Tipografía */
-  --font-display: 'DM Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  /* Tipografía Oficial: Comfortaa (marca, botones, chips) & Domine (títulos y editorial) */
+  --font-serif: 'Domine', Georgia, 'Times New Roman', serif;
+  --font-display: 'Domine', Georgia, 'Times New Roman', serif;
+  --font-brand: 'Comfortaa', cursive, sans-serif;
   --font-body: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
   
   /* Transiciones */
@@ -85,6 +87,27 @@ a {
 button, input, textarea, select {
   font-family: inherit;
   font-size: inherit;
+}
+
+/* ==========================================================================
+   TIPOGRAFÍA OFICIAL: DOMINE (EDITORIAL / TÍTULOS) & COMFORTAA (MARCA / UI)
+   ========================================================================== */
+h1, h2, h3, h4, h5, h6,
+.hero-title, .editorial-headline, .card-title, .popup-title,
+.reels-section-title, .form-title, .rules-title, .insta-bio-headline,
+.modal-title, .map-header-title span, .empty-title {
+  font-family: var(--font-serif);
+}
+
+.brand-title, .brand-text, .brand-wrapper, .side-menu-name, .footer-brand-name,
+.btn-pin-add, .btn-hero-primary, .btn-hero-secondary, .btn-collab-cta, .btn-collab-wa,
+.category-chip, .reels-filter-btn, .btn-card-map-action, .btn-submit-apply,
+.card-floating-badge, .official-collab-badge, .drawer-badge, .route-count-badge,
+.nav-link-pill, .btn-route-toggle, .btn-wa-share-route, .btn-optimize-route,
+.btn-gmaps-full, .btn-gcalendar-full, .btn-download-ics, .editorial-tag, .hero-tag,
+.card-rating-badge, .card-video-pill, .curator-tag-overlay, .btn-uber-mini,
+.btn-airbnb-mini, .stop-name, .quote-label {
+  font-family: var(--font-brand);
 }
 
 /* ==========================================================================
