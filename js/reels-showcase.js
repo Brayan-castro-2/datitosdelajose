@@ -70,15 +70,25 @@ function renderReelsGallery(activeFilter = 'all', showAll = false) {
   }
 
   // Render Grid Desktop
-  desktopContainer.innerHTML = displayList.map(item => `
+  desktopContainer.innerHTML = displayList.map(item => {
+    const poster = `thumbs/thumb_${item.shortcode}.jpg`;
+    const titulo = item.title || item.titulo || `${item.categoria || 'Dato'} · @datitosdelajose`;
+    const descripcion = item.desc || item.descripcion || 'Recomendación comprobada personalmente por María José Ibáñez Walker (@datitosdelajose).';
+    const lugar = item.lugar || 'Puerto Varas · Región de Los Lagos';
+    const handle = item.igHandle || item.handle || '@datitosdelajose';
+    const categoriaLabel = item.badge || item.categoriaLabel || item.categoria || 'Recomendación';
+    const airbnbUrl = item.airbnbLink || item.airbnbUrl || '';
+    const whatsappUrl = item.waLink || item.whatsappUrl || '';
+
+    return `
     <article class="reel-card-item" data-id="${item.id}">
       <div class="reel-media-box" onclick="openReelModal(${item.id})">
         <img 
-          src="${item.poster}" 
-          alt="${item.titulo}" 
+          src="${poster}" 
+          alt="${titulo}" 
           class="reel-cover-img" 
           loading="lazy" 
-          onerror="this.onerror=null; this.src='${item.fallbackPoster}';"
+          onerror="this.onerror=null; this.src='thumbs/maria_jose_post.jpg';"
         >
         <div class="reel-play-overlay" title="Reproducir Reel">
           <div class="reel-play-icon-circle">
@@ -86,10 +96,10 @@ function renderReelsGallery(activeFilter = 'all', showAll = false) {
           </div>
         </div>
         <div class="reel-badge-top">
-          <span class="reel-pill-highlight">${item.vistas}</span>
-          <span class="reel-pill-category">${item.categoriaLabel}</span>
+          <span class="reel-pill-highlight">Reel</span>
+          <span class="reel-pill-category">${categoriaLabel}</span>
         </div>
-        ${item.airbnbUrl ? `
+        ${airbnbUrl ? `
           <div class="reel-airbnb-ribbon">
             <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
             <span>Opción Airbnb</span>
@@ -100,15 +110,15 @@ function renderReelsGallery(activeFilter = 'all', showAll = false) {
       <div class="reel-info-bar">
         <div class="reel-brand-header">
           <div class="reel-avatar-wrap">
-            <img src="thumbs/logo_insta.jpg" alt="Datitos de la Jose" class="reel-avatar-img" onerror="this.src='thumbs/thumb_${item.shortcode}.jpg'">
+            <img src="thumbs/logo_insta.jpg" alt="Datitos de la Jose" class="reel-avatar-img">
           </div>
           <div class="reel-brand-names">
-            <h3 class="reel-brand-title">${item.lugar}</h3>
-            <p class="reel-brand-handle">${item.handle}</p>
+            <h3 class="reel-brand-title">${lugar}</h3>
+            <p class="reel-brand-handle">${handle}</p>
           </div>
         </div>
 
-        <p class="reel-card-description">"${item.descripcion}"</p>
+        <p class="reel-card-description">"${descripcion}"</p>
 
         <div class="reel-card-actions">
           <div class="reel-actions-primary">
@@ -126,17 +136,17 @@ function renderReelsGallery(activeFilter = 'all', showAll = false) {
             </button>
           </div>
 
-          ${(item.airbnbUrl || item.whatsappUrl) ? `
+          ${(airbnbUrl || whatsappUrl) ? `
             <div class="reel-actions-secondary">
-              ${item.airbnbUrl ? `
-                <a href="${item.airbnbUrl}" target="_blank" rel="noopener" class="btn-reel-airbnb" title="Ver en Airbnb">
+              ${airbnbUrl ? `
+                <a href="${airbnbUrl}" target="_blank" rel="noopener" class="btn-reel-airbnb" title="Ver en Airbnb">
                   <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
                   <span>Airbnb</span>
                 </a>
               ` : ''}
 
-              ${item.whatsappUrl ? `
-                <a href="${item.whatsappUrl}" target="_blank" rel="noopener" class="btn-reel-wa" title="Consultar por WhatsApp">
+              ${whatsappUrl ? `
+                <a href="${whatsappUrl}" target="_blank" rel="noopener" class="btn-reel-wa" title="Consultar por WhatsApp">
                   <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M12.031 6.172c-3.181 0-5.767 2.586-5.768 5.766-.001 1.298.38 2.27 1.019 3.287l-.582 2.128 2.182-.573c.978.58 1.911.928 3.145.929 3.178 0 5.767-2.587 5.768-5.766.001-3.187-2.575-5.771-5.764-5.771zm3.392 8.244c-.144.405-.837.774-1.17.824-.299.045-.677.063-1.092-.069-.252-.08-.575-.187-.988-.365-1.739-.751-2.874-2.502-2.961-2.617-.087-.116-.708-.94-.708-1.793s.448-1.273.607-1.446c.159-.173.346-.217.462-.217l.332.006c.106.005.249-.04.39.298.144.347.491 1.2.534 1.287.043.087.072.188.014.304-.058.116-.087.188-.173.289l-.26.304c-.087.086-.177.18-.076.354.101.174.449.741.964 1.201.662.591 1.221.774 1.394.86.173.086.275.071.376-.043.101-.116.433-.506.549-.68.116-.173.231-.145.39-.087s1.011.477 1.184.564c.173.087.289.129.332.202.043.073.043.419-.101.824z"/></svg>
                   <span>WhatsApp</span>
                 </a>
@@ -146,7 +156,8 @@ function renderReelsGallery(activeFilter = 'all', showAll = false) {
         </div>
       </div>
     </article>
-  `).join('');
+    `;
+  }).join('');
 }
 
 // ============================================================================
@@ -160,11 +171,19 @@ function openReelModal(id) {
   const modal = document.getElementById('reelModal');
   if (!modal) return;
 
-  document.getElementById('reelModalCategory').textContent = item.categoriaLabel;
-  document.getElementById('reelModalTitle').textContent = item.titulo;
-  document.getElementById('reelModalLugar').textContent = item.lugar;
-  document.getElementById('reelModalBadge').textContent = item.vistas;
-  document.getElementById('reelModalDesc').textContent = item.descripcion;
+  const titulo = item.title || item.titulo || `${item.categoria || 'Dato'} · @datitosdelajose`;
+  const descripcion = item.desc || item.descripcion || '';
+  const lugar = item.lugar || 'Puerto Varas · Región de Los Lagos';
+  const categoriaLabel = item.badge || item.categoriaLabel || item.categoria || 'Recomendación';
+  const airbnbUrl = item.airbnbLink || item.airbnbUrl || '';
+  const whatsappUrl = item.waLink || item.whatsappUrl || '';
+  const igUrl = item.igUrl || item.url || `https://www.instagram.com/reel/${item.shortcode}/`;
+
+  document.getElementById('reelModalCategory').textContent = categoriaLabel;
+  document.getElementById('reelModalTitle').textContent = titulo;
+  document.getElementById('reelModalLugar').textContent = lugar;
+  document.getElementById('reelModalBadge').textContent = 'Reel Oficial';
+  document.getElementById('reelModalDesc').textContent = descripcion;
 
   // Detalles adicionales
   const detallesEl = document.getElementById('reelModalDetalles');
@@ -176,8 +195,8 @@ function openReelModal(id) {
   // Botón Airbnb
   const airbnbBtn = document.getElementById('reelModalAirbnbBtn');
   if (airbnbBtn) {
-    if (item.airbnbUrl) {
-      airbnbBtn.href = item.airbnbUrl;
+    if (airbnbUrl) {
+      airbnbBtn.href = airbnbUrl;
       airbnbBtn.style.display = 'inline-flex';
     } else {
       airbnbBtn.style.display = 'none';
@@ -187,8 +206,8 @@ function openReelModal(id) {
   // Botón WhatsApp
   const waBtn = document.getElementById('reelModalWaBtn');
   if (waBtn) {
-    if (item.whatsappUrl) {
-      waBtn.href = item.whatsappUrl;
+    if (whatsappUrl) {
+      waBtn.href = whatsappUrl;
       waBtn.style.display = 'inline-flex';
     } else {
       waBtn.style.display = 'none';
@@ -221,17 +240,17 @@ function openReelModal(id) {
 
   // Enlace externo a Instagram
   const igBtn = document.getElementById('reelModalIgLink');
-  if (igBtn) igBtn.href = item.url;
+  if (igBtn) igBtn.href = igUrl;
 
   // Inyectar selector de otros reels recomendados
   const reelsRow = document.getElementById('reelModalOtherReels');
   if (reelsRow) {
     const others = REELS_DATA.filter(r => r.id !== item.id).slice(0, 8);
     reelsRow.innerHTML = others.map(r => `
-      <div class="modal-other-reel-thumb" onclick="openReelModal(${r.id})" title="${r.titulo}">
-        <img src="${r.poster}" alt="${r.lugar}" onerror="this.onerror=null; this.src='${r.fallbackPoster}';">
+      <div class="modal-other-reel-thumb" onclick="openReelModal(${r.id})" title="${r.title || r.titulo || ''}">
+        <img src="thumbs/thumb_${r.shortcode}.jpg" alt="${r.lugar || ''}" onerror="this.onerror=null; this.src='thumbs/maria_jose_post.jpg';">
         <div class="modal-other-reel-overlay">
-          <span class="modal-other-badge">${r.vistas}</span>
+          <span class="modal-other-badge">${r.badge || r.categoria || 'Reel'}</span>
         </div>
       </div>
     `).join('');
@@ -242,7 +261,7 @@ function openReelModal(id) {
   if (mediaBox) {
     const code = item.shortcode || item.shortCode;
     const directVideoUrl = item.videoUrl;
-    const posterImg = item.poster || item.fallbackPoster || '';
+    const posterImg = `thumbs/thumb_${code}.jpg`;
 
     if (code) {
       mediaBox.innerHTML = `

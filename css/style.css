@@ -649,11 +649,17 @@ h1, h2, h3, h4, h5, h6,
   outline-offset: 2px;
 }
 
-.marker-hover-bounce {
-  transform: scale(1.35) translateY(-8px) !important;
+/* Corrección Bug Parpadeo: NUNCA tocar transform en el contenedor .custom-leaflet-marker-wrapper
+   porque Leaflet usa transform: translate3d(x,y,0) para colocar el pin en el mapa */
+.custom-leaflet-marker-wrapper.marker-hover-bounce {
+  z-index: 10000 !important;
+}
+
+.custom-leaflet-marker-wrapper.marker-hover-bounce .custom-emote-pin {
+  transform: rotate(-45deg) scale(1.28) translate(-2px, -2px) !important;
   transition: transform 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-  z-index: 1000 !important;
-  filter: drop-shadow(0 6px 14px rgba(230, 0, 35, 0.6)) !important;
+  box-shadow: 0 8px 24px rgba(230, 0, 35, 0.5) !important;
+  border-color: #E60023 !important;
 }
 
 /* Contenedor de Imagen con Efecto Hover */
